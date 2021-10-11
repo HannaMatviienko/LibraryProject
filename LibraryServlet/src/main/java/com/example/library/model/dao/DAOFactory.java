@@ -6,6 +6,38 @@ public class DAOFactory {
     private DAOFactory() {
     }
 
+    private static AccountDAO accountDAO = null;
+
+    public static AccountDAO getAccount() {
+        if (accountDAO == null)
+            accountDAO = new AccountDAO();
+        return accountDAO;
+    }
+
+    private static AuthorDAO authorDAO = null;
+
+    public static AuthorDAO getAuthor() {
+        if (authorDAO == null)
+            authorDAO = new AuthorDAO();
+        return authorDAO;
+    }
+
+    private static BookDAO bookDAO = null;
+
+    public static BookDAO getBook() {
+        if (bookDAO == null)
+            bookDAO = new BookDAO();
+        return bookDAO;
+    }
+
+    private static PublicationDAO publicationDAO = null;
+
+    public static PublicationDAO getPublication(){
+        if (publicationDAO == null)
+            publicationDAO = new PublicationDAO();
+        return publicationDAO;
+    }
+
     private static UserDAO userDAO = null;
 
     public static UserDAO getUser() {
@@ -13,6 +45,7 @@ public class DAOFactory {
             userDAO = new UserDAO();
         return userDAO;
     }
+
 
     public static void setUser(UserDAO userDAO) {
         DAOFactory.userDAO = userDAO;

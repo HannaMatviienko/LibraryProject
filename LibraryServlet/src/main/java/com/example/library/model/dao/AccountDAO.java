@@ -27,6 +27,7 @@ public class AccountDAO {
             AccountItem item = new AccountItem();
             item.setId(result.getInt("id"));
             item.setBook(DAOFactory.getBook().get(result.getInt("book_id")));
+            item.setStatus(result.getInt("status"));
             list.add(item);
         }
 

@@ -37,6 +37,8 @@
         </ul>
 
         <div class="col-md-3 text-end">
+            <a href="${pageContext.request.contextPath}/admin/users/new"
+               class="btn btn-primary me-2"><fmt:message key="add"/></a>
             <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-outline-primary"><fmt:message
                     key="menu.logout"/></a>
         </div>
@@ -49,10 +51,12 @@
     <table class="table mt-4">
         <thead>
         <tr>
-            <th class="text-center" style="width: 25%"><fmt:message key="book.title"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="author.name"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="publishing.name"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="year.publication"/></th>
+            <th class="text-center" style="width: 16.6%"><fmt:message key="book.title"/></th>
+            <th class="text-center" style="width: 16.6%"><fmt:message key="author.name"/></th>
+            <th class="text-center" style="width: 16.6%"><fmt:message key="publishing.name"/></th>
+            <th class="text-center" style="width: 16.6%"><fmt:message key="year.publication"/></th>
+            <th class="text-center" style="width: 5%"></th>
+            <th class="text-center" style="width: 5%"></th>
         </tr>
         </thead>
         <tbody>
@@ -62,6 +66,10 @@
             <td class="text-center">${item.author.name}</td>
             <td class="text-center">${item.publication.name}</td>
             <td class="text-center">${item.yearPublication}</td>
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="admin.edit"/></a></td>
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                                        class="btn btn-sm btn-outline-danger me-2"><fmt:message key="admin.delete"/></a></td>
             </c:forEach>
         </tr>
         </tbody>

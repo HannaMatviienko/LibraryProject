@@ -32,9 +32,6 @@
 </div>
 <h1 class="text-center"><fmt:message key="user.account"/></h1>
 
-
-<h4 class="text-center"><fmt:message key="book.ordered"/></h4>
-
 <div class="container">
     <table class="table mt-4">
         <thead>
@@ -43,83 +40,7 @@
             <th class="text-center" style="width: 14.3%"><fmt:message key="author.name"/></th>
             <th class="text-center" style="width: 14.3%"><fmt:message key="publishing.name"/></th>
             <th class="text-center" style="width: 14.3%"><fmt:message key="year.publication"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="number.books.taken"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="date.return"/></th>
             <th class="text-center" style="width: 14.3%"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="text-center">Fantastic Beasts and Where to Find Them</td>
-            <td class="text-center">J. K. Rowling</td>
-            <td class="text-center">Bloomsbury</td>
-            <td class="text-center">2001</td>
-            <td class="text-center">1</td>
-            <td class="text-center">01.11.2021</td>
-            <td class="text-center">
-                <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
-                   class="btn btn-sm btn-outline-danger me-2"><fmt:message key="book.remove"/></a> </td>
-        </tr>
-
-        <tr>
-            <td class="text-center">Harry Potter and the Philosopher's Stone</td>
-            <td class="text-center">J. K. Rowling</td>
-            <td class="text-center">Bloomsbury</td>
-            <td class="text-center">1997</td>
-            <td class="text-center">1</td>
-            <td class="text-center">16.10.2021</td>
-            <td class="text-center">
-                <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
-                   class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.return"/></a> </td>
-        </tr>
-        <tr>
-            <td class="text-center">The Tales of Beedle the Bard</td>
-            <td class="text-center">J. K. Rowling</td>
-            <td class="text-center">Bloomsbury</td>
-            <td class="text-center">2008</td>
-            <td class="text-center">1</td>
-            <td class="text-center">28.09.2021</td>
-            <td class="text-center">
-                <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
-                   class="btn btn-sm btn-outline-secondary me-2"><fmt:message key="book.reorder"/></a> </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="container">
-    <table class="table mt-4">
-        <thead>
-        <tr>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="user.user"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="book.title"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="status"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="date.take"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="date.return"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="date.returned"/></th>
-            <th class="text-center" style="width: 14.3%"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${books}" var="item">
-            <tr>
-                <td>${item.id}</td>
-                <td>${item.book.name}</td>
-            </tr>
-        </c:forEach>
-
-        </tbody>
-    </table>
-    </div>
-
-<div class="container">
-    <table class="table mt-4">
-        <thead>
-        <tr>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="book.title"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="author.name"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="publishing.name"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="year.publication"/></th>
         </tr>
         </thead>
         <tbody>
@@ -129,6 +50,25 @@
                 <td class="text-center">${item.book.author.name}</td>
                 <td class="text-center">${item.book.publication.name}</td>
                 <td class="text-center">${item.book.yearPublication}</td>
+
+                <td class="text-center">
+                    <c:choose>
+                        <c:when test="${item.status == 0}">
+                            <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                                class="btn btn-sm btn-outline-danger me-2"><fmt:message key="book.remove"/></a> </td>
+                        </c:when>
+
+                        <c:when test="${item.status == 1}">
+                            <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                               class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.return"/></a> </td>
+                        </c:when>
+
+                        <c:when test="${item.status == 2}">
+                            <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                               class="btn btn-sm btn-outline-secondary me-2"><fmt:message key="book.reorder"/></a>
+                        </c:when>
+                    </c:choose>
+                </td>
         </c:forEach>
             </tr>
         </tbody>

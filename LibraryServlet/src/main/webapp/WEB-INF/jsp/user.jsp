@@ -110,6 +110,28 @@
 
         </tbody>
     </table>
+    </div>
 
-
+<div class="container">
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th class="text-center" style="width: 14.3%"><fmt:message key="book.title"/></th>
+            <th class="text-center" style="width: 14.3%"><fmt:message key="author.name"/></th>
+            <th class="text-center" style="width: 14.3%"><fmt:message key="publishing.name"/></th>
+            <th class="text-center" style="width: 14.3%"><fmt:message key="year.publication"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${books}" var="item">
+            <tr>
+                <td class="text-center">${item.book.name}</td>
+                <td class="text-center">${item.book.author.name}</td>
+                <td class="text-center">${item.book.publication.name}</td>
+                <td class="text-center">${item.book.yearPublication}</td>
+        </c:forEach>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </html>

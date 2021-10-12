@@ -1,6 +1,5 @@
 package com.example.library.model.dao;
 
-import com.example.library.model.entity.AccountItem;
 import com.example.library.model.entity.Book;
 import com.example.library.model.entity.Publication;
 
@@ -35,5 +34,29 @@ public class BookDAO {
         }
 
         return null;
+    }
+
+    public List <Book> getAll() throws SQLException,
+            ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "SELECT * FROM books";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        ResultSet result = statement.executeQuery();
+        List<Book> list = new ArrayList<>();
+
+        while (result.next()){
+            Book book = new Book();
+            book.setId(result.getInt("id"));
+            book.setName(result.getString("name"));
+            book.setAuthor(DAOFactory.getAuthor().get(result.getInt("author_id"), connection));
+            book.setPublication(DAOFactory.getPublication().get(result.getInt("publication_id"), connection));
+            book.setYearPublication(result.getInt("year_publication"));
+            book.setNumberOf((result.getInt("number_of")));
+            list.add(book);
+        }
+
+        connection.close();
+        return list;
     }
 }

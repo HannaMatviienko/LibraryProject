@@ -120,7 +120,7 @@ public class UserDAO {
             user.setLastName(result.getString("last_name"));
             user.setFirstName(result.getString("first_name"));
             user.setEmail(result.getString("email"));
-            user.setRole(User.ROLE.parseRole(result.getString("roles")));
+            user.setRole(User.ROLE.parseRole(result.getString("role")));
             list.add(user);
         }
         connection.close();

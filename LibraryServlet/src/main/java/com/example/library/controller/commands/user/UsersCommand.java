@@ -8,20 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-public class AdminCommand implements Command {
+public class UsersCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        try
-        {
+        try {
             request.setAttribute("users", DAOFactory.getUser().get());
-            request.setAttribute("books", DAOFactory.getBook().getAll());
-            request.setAttribute("publication", DAOFactory.getPublication().getAll());
-            request.setAttribute("author", DAOFactory.getAuthor().getAll());
+            return "/WEB-INF/jsp/users.jsp";
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new ServletException(ex);
         }
-        catch (SQLException |ClassNotFoundException ex)
-        {
-            new ServletException(ex);
-        }
-        return "/WEB-INF/jsp/admin.jsp";
     }
 }

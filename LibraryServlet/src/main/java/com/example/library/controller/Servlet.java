@@ -28,6 +28,10 @@ public class Servlet extends HttpServlet {
         commands.put("/user/account/admin", new AdminCommand());
         commands.put("/user/account/librarian", new LibrarianCommand());
         commands.put("/user/account/user", new UserCommand());
+        commands.put("/user/account/admin/authors", new AuthorsCommand());
+        commands.put("/user/account/admin/books", new BooksCommand());
+        commands.put("/user/account/admin/publications", new PublicationsCommand());
+        commands.put("/user/account/admin/users", new UsersCommand());
 //        commands.put("/user/logout", new LogOutCommand());
         //commands.put("/user/signup", new SignUpCommand());
 

@@ -2,7 +2,13 @@ package com.example.library.controller;
 
 import com.example.library.controller.commands.Command;
 import com.example.library.controller.commands.IndexCommand;
+import com.example.library.controller.commands.author.AuthorEditCommand;
+import com.example.library.controller.commands.author.AuthorSaveCommand;
+import com.example.library.controller.commands.author.AuthorsCommand;
 import com.example.library.controller.commands.book.*;
+import com.example.library.controller.commands.publication.PublicationEditCommand;
+import com.example.library.controller.commands.publication.PublicationSaveCommand;
+import com.example.library.controller.commands.publication.PublicationsCommand;
 import com.example.library.controller.commands.user.*;
 
 
@@ -26,12 +32,23 @@ public class Servlet extends HttpServlet {
         commands = new HashMap<>();
         commands.put("/user/login", new LogInCommand());
         commands.put("/user/account/admin", new AdminCommand());
-        commands.put("/user/account/librarian", new LibrarianCommand());
-        commands.put("/user/account/user", new UserCommand());
+
         commands.put("/user/account/admin/authors", new AuthorsCommand());
+        commands.put("/user/account/admin/authors/edit", new AuthorEditCommand());
+        commands.put("/user/account/admin/authors/save", new AuthorSaveCommand());
+
         commands.put("/user/account/admin/books", new BooksCommand());
+
         commands.put("/user/account/admin/publications", new PublicationsCommand());
+        commands.put("/user/account/admin/publications/edit", new PublicationEditCommand());
+        commands.put("/user/account/admin/publications/save", new PublicationSaveCommand());
+
         commands.put("/user/account/admin/users", new UsersCommand());
+        commands.put("/user/account/librarian", new LibrarianCommand());
+        commands.put("/user/account/librarian/ordered", new OrderedBooksCommand());
+        commands.put("/user/account/librarian/users", new LibrarianAccessUsersCommand());
+        commands.put("/user/account/user", new UserCommand());
+
 //        commands.put("/user/logout", new LogOutCommand());
         //commands.put("/user/signup", new SignUpCommand());
 

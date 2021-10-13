@@ -74,7 +74,7 @@
         <tr>
             <th class="text-center" style="width: 25%"><fmt:message key="book.title"/></th>
             <th class="text-center" style="width: 25%"><fmt:message key="author.name"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="publishing.name"/></th>
+            <th class="text-center" style="width: 25%"><fmt:message key="publication.name"/></th>
             <th class="text-center" style="width: 25%"><fmt:message key="year.publication"/></th>
         </tr>
         </thead>
@@ -96,7 +96,7 @@
         <thead>
         <tr>
             <th class="text-center" style="width: 25%"><fmt:message key="ident"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="publishing.name"/></th>
+            <th class="text-center" style="width: 25%"><fmt:message key="publication.name"/></th>
         </tr>
         </thead>
         <tbody>

@@ -38,7 +38,7 @@
         <tr>
             <th class="text-center" style="width: 14.3%"><fmt:message key="book.title"/></th>
             <th class="text-center" style="width: 14.3%"><fmt:message key="author.name"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="publishing.name"/></th>
+            <th class="text-center" style="width: 14.3%"><fmt:message key="publication.name"/></th>
             <th class="text-center" style="width: 14.3%"><fmt:message key="year.publication"/></th>
             <th class="text-center" style="width: 14.3%"></th>
         </tr>

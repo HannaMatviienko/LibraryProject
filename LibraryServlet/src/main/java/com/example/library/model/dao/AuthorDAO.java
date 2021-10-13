@@ -59,4 +59,24 @@ public class AuthorDAO {
         connection.close();
         return list;
     }
+
+    public void save(Author author) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql;
+        if (author.getId() == -1)
+            sql = "INSERT INTO authors (name) VALUES (?)";
+        else
+            sql = "UPDATE authors SET name = ? WHERE id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, author.getName());
+        if (author.getId() != -1)
+            statement.setInt(2, author.getId());
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Creating author failed, no rows affected.");
+        }
+        connection.close();
+    }
 }

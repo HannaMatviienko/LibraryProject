@@ -4,6 +4,11 @@ public class Author {
     private int id;
     private String name;
 
+    public Author()
+    {
+        id = -1;
+    }
+
     public int getId() {
         return id;
     }

@@ -33,4 +33,26 @@ public class AccountDAO {
 
         return list;
     }
+    public List<AccountItem> getOrder(int status) throws SQLException,
+            ClassNotFoundException {
+
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "SELECT * FROM account_books WHERE status = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, status);
+
+        ResultSet result = statement.executeQuery();
+
+        List<AccountItem> orders = new ArrayList();
+
+        while (result.next()){
+            AccountItem item = new AccountItem();
+            item.setId(result.getInt("id"));
+            item.setBook(DAOFactory.getBook().get(result.getInt("book_id")));
+            item.setStatus(result.getInt("status"));
+            orders.add(item);
+        }
+
+        return orders;
+    }
 }

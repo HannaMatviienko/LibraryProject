@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><fmt:message key="book.books"/></title>
+    <title><fmt:message key="book.ordered"/></title>
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -24,28 +24,22 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/user/account/admin" class="nav-link px-2 link-dark"><fmt:message
-                    key="admin.admin"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/authors" class="nav-link px-2 link-dark"><fmt:message
-                    key="author.authors"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/books"
-                   class="nav-link px-2 link-primary"><fmt:message key="book.books"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/publications" class="nav-link px-2 link-dark"><fmt:message
-                    key="publication.publications"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/users" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/user/account/librarian" class="nav-link px-2 link-dark"><fmt:message
+                    key="librarian.librarian"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/user/account/librarian/ordered"
+                   class="nav-link px-2 link-primary"><fmt:message key="book.ordered"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/user/account/librarian/users" class="nav-link px-2 link-dark"><fmt:message
                     key="user.users"/></a></li>
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="${pageContext.request.contextPath}/admin/users/new"
-               class="btn btn-primary me-2"><fmt:message key="add"/></a>
             <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-outline-primary"><fmt:message
                     key="menu.logout"/></a>
         </div>
     </header>
 </div>
 
-<div class="container"><h1 class="text-center"><fmt:message key="book.books"/></h1></div>
+<div class="container"><h1 class="text-center"><fmt:message key="book.ordered"/></h1></div>
 
 <div class="container">
     <table class="table mt-4">
@@ -60,20 +54,19 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${books}" var="item">
+        <c:forEach items="${orderedBooks}" var="item">
         <tr>
-            <td class="text-center">${item.name}</td>
-            <td class="text-center">${item.author.name}</td>
-            <td class="text-center">${item.publication.name}</td>
-            <td class="text-center">${item.yearPublication}</td>
+            <td class="text-center">${item.book.name}</td>
+            <td class="text-center">${item.book.author.name}</td>
+            <td class="text-center">${item.book.publication.name}</td>
+            <td class="text-center">${item.book.yearPublication}</td>
             <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
-                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="admin.edit"/></a></td>
+                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="librarian.confirm"/></a></td>
             <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
-                                        class="btn btn-sm btn-outline-danger me-2"><fmt:message key="admin.delete"/></a></td>
+                                        class="btn btn-sm btn-outline-danger me-2"><fmt:message key="librarian.cancel"/></a></td>
+
             </c:forEach>
         </tr>
         </tbody>
     </table>
 </div>
-</body>
-</html>

@@ -148,6 +148,28 @@ public class UserDAO {
         return user;
     }
 
+    public List<User> getRole() throws SQLException,
+            ClassNotFoundException {
+
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "SELECT * FROM users WHERE role = 'ROLE_USER'";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        ResultSet result = statement.executeQuery();
+        List<User> list = new ArrayList<>();
+        while (result.next()) {
+            User user = new User();
+            user.setId(result.getLong("id"));
+            user.setLastName(result.getString("last_name"));
+            user.setFirstName(result.getString("first_name"));
+            user.setEmail(result.getString("email"));
+            user.setRole(User.ROLE.parseRole(result.getString("role")));
+            list.add(user);
+        }
+        connection.close();
+        return list;
+    }
+
     public void save(User user) throws SQLException, ClassNotFoundException {
         Connection connection = ConnectionPool.getConnection();
         String sql;

@@ -4,6 +4,10 @@ public class Publication {
     private int id;
     private String name;
 
+    public Publication() {
+        id = -1;
+    }
+
     public int getId() {
         return id;
     }

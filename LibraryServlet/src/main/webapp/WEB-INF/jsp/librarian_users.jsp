@@ -24,17 +24,15 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/user/account/librarian" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/librarian" class="nav-link px-2 link-dark"><fmt:message
                     key="librarian.librarian"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/librarian/ordered"
+            <li><a href="${pageContext.request.contextPath}/librarian/ordered"
                    class="nav-link px-2 link-dark"><fmt:message key="book.ordered"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/librarian/users" class="nav-link px-2 link-primary"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/librarian/users" class="nav-link px-2 link-primary"><fmt:message
                     key="user.users"/></a></li>
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="${pageContext.request.contextPath}/admin/users/new"
-               class="btn btn-primary me-2"><fmt:message key="add"/></a>
             <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-outline-primary"><fmt:message
                     key="menu.logout"/></a>
         </div>

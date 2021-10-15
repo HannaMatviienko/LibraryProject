@@ -9,17 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-public class AuthorSaveCommand implements Command {
+public class AuthorNewCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        try {
-            Author author = new Author();
-            author.setId(Integer.parseInt(request.getParameter("id")));
-            author.setName(request.getParameter("name"));
-            DAOFactory.getAuthor().save(author);
-        } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
-            throw new ServletException(ex);
-        }
-        return "redirect:/admin/authors";
+        request.setAttribute("author", new Author());
+        request.setAttribute("mode", 0);
+        return "/WEB-INF/jsp/author.jsp";
     }
 }

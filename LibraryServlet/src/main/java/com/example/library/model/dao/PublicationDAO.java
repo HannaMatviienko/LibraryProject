@@ -80,4 +80,17 @@ public class PublicationDAO {
         }
         connection.close();
     }
+    public void delete(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "DELETE FROM publications WHERE id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Deleting publication failed, no rows affected.");
+        }
+        connection.close();
+    }
 }

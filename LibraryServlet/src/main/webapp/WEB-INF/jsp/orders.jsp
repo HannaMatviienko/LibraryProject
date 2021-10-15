@@ -24,11 +24,11 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/user/account/librarian" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/librarian" class="nav-link px-2 link-dark"><fmt:message
                     key="librarian.librarian"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/librarian/ordered"
+            <li><a href="${pageContext.request.contextPath}/librarian/ordered"
                    class="nav-link px-2 link-primary"><fmt:message key="book.ordered"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/librarian/users" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/librarian/users" class="nav-link px-2 link-dark"><fmt:message
                     key="user.users"/></a></li>
         </ul>
 

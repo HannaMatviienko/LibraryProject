@@ -8,6 +8,11 @@ public class Book {
     private Author author;
     private Publication publication;
 
+    public Book()
+    {
+        id = -1;
+    }
+
     public int getId() {
         return id;
     }

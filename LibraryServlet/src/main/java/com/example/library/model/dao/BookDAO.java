@@ -1,5 +1,6 @@
 package com.example.library.model.dao;
 
+import com.example.library.model.entity.Author;
 import com.example.library.model.entity.Book;
 import com.example.library.model.entity.Publication;
 
@@ -58,5 +59,43 @@ public class BookDAO {
 
         connection.close();
         return list;
+    }
+
+    public void save(Book book) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql;
+        if (book.getId() == -1)
+            sql = "INSERT INTO books (name, author_id, publication_id, year_publication, number_of) VALUES (?, ?, ?, ?, ?)";
+        else
+            sql = "UPDATE books SET name = ?, author_id = ?, publication_id = ?, year_publication =?, number_of = ? WHERE id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, book.getName());
+        statement.setInt(2, book.getAuthor().getId());
+        statement.setInt(3, book.getPublication().getId());
+        statement.setInt(4, book.getYearPublication());
+        statement.setInt(5, book.getNumberOf());
+        if (book.getId() != -1)
+            statement.setInt(6, book.getId());
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Creating book failed, no rows affected.");
+        }
+        connection.close();
+    }
+
+    public void delete(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "DELETE FROM books WHERE id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Deleting book failed, no rows affected.");
+        }
+        connection.close();
     }
 }

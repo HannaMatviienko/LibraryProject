@@ -8,6 +8,11 @@ public class Publication {
         id = -1;
     }
 
+    public Publication(int id) {
+        this.id = id;
+    }
+
+
     public int getId() {
         return id;
     }

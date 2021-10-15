@@ -1,4 +1,4 @@
-package com.example.library.controller.commands.user;
+package com.example.library.controller.commands.librarian;
 
 import com.example.library.controller.commands.Command;
 import com.example.library.model.dao.DAOFactory;

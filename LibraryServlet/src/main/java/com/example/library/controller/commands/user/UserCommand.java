@@ -24,6 +24,6 @@ public class UserCommand implements Command {
         {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/user.jsp";
+        return "/WEB-INF/jsp/user_account.jsp";
     }
 }

@@ -24,23 +24,23 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/user/account/admin"
+            <li><a href="${pageContext.request.contextPath}/admin"
                    class="nav-link px-2 link-dark"><fmt:message
                     key="admin.admin"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/authors" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/admin/authors" class="nav-link px-2 link-dark"><fmt:message
                     key="author.authors"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/books"
+            <li><a href="${pageContext.request.contextPath}/admin/books"
                    class="nav-link px-2 link-dark"><fmt:message key="book.books"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/publications"
+            <li><a href="${pageContext.request.contextPath}/admin/publications"
                    class="nav-link px-2 link-primary"><fmt:message
                     key="publication.publications"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/users"
+            <li><a href="${pageContext.request.contextPath}/admin/users"
                    class="nav-link px-2 link-dark"><fmt:message
                     key="user.users"/></a></li>
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="${pageContext.request.contextPath}/admin/users/new"
+            <a href="${pageContext.request.contextPath}/admin/publications/new"
                class="btn btn-primary me-2"><fmt:message key="add"/></a>
             <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-outline-primary"><fmt:message
                     key="menu.logout"/></a>
@@ -51,6 +51,11 @@
 <div class="container"><h1 class="text-center"><fmt:message key="publication.publications"/></h1></div>
 
 <div class="container">
+    <%--@elvariable id="error" type="java.lang.Boolean"--%>
+    <c:if test="${param.containsKey('error')}">
+        <div class="alert alert-danger" role="alert"><fmt:message key="error.publications"/></div>
+    </c:if>
+
     <table class="table mt-4">
         <thead>
         <tr>
@@ -63,9 +68,9 @@
         <tr>
             <td class="text-center">${publication.name}</td>
             <td class="text-end">
-                <a href="${pageContext.request.contextPath}/user/account/admin/publications/edit?id=${publication.id}"
+                <a href="${pageContext.request.contextPath}/admin/publications/edit?id=${publication.id}"
                    class="btn btn-sm btn-outline-success me-2"><fmt:message key="admin.edit"/></a>
-                <a href="${pageContext.request.contextPath}/user/account/admin/publications/delete?id=${publication.id}"
+                <a href="${pageContext.request.contextPath}/admin/publications/delete?id=${publication.id}"
                    class="btn btn-sm btn-outline-danger me-2"><fmt:message key="admin.delete"/></a>
             </td>
             </c:forEach>

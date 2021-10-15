@@ -12,11 +12,11 @@
     <title>
         <c:choose>
             <c:when test="${mode == 0}">
-                <fmt:message key="admin.car.new"/>
+                <fmt:message key="admin.publication.new"/>
             </c:when>
 
             <c:when test="${mode == 1}">
-                <fmt:message key="admin.car.edit"/>
+                <fmt:message key="admin.publication.edit"/>
             </c:when>
         </c:choose>
     </title>
@@ -37,21 +37,19 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/user/account/admin" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/admin" class="nav-link px-2 link-dark"><fmt:message
                     key="admin.admin"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/authors" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/admin/authors" class="nav-link px-2 link-dark"><fmt:message
                     key="author.authors"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/books"
+            <li><a href="${pageContext.request.contextPath}/admin/books"
                    class="nav-link px-2 link-dark"><fmt:message key="book.books"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/publications" class="nav-link px-2 link-primary"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/admin/publications" class="nav-link px-2 link-primary"><fmt:message
                     key="publication.publications"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/user/account/admin/users" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/admin/users" class="nav-link px-2 link-dark"><fmt:message
                     key="user.users"/></a></li>
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="${pageContext.request.contextPath}/admin/users/new"
-               class="btn btn-primary me-2"><fmt:message key="add"/></a>
             <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-outline-primary"><fmt:message
                     key="menu.logout"/></a>
         </div>
@@ -60,7 +58,7 @@
 
 <div class="container col-xxl-5 py-3">
     <div>
-        <form action="${pageContext.request.contextPath}/user/account/admin/publications/save" method="post" class="needs-validation" novalidate="">
+        <form action="${pageContext.request.contextPath}/admin/publications/save" method="post" class="needs-validation" novalidate="">
 
             <input value="${publication.id}" type="hidden" name="id">
 
@@ -75,7 +73,7 @@
             </div>
 
             <button class="w-half btn btn-primary btn-lg mt-5" type="submit"><fmt:message key="admin.save"/></button>
-            <a class="w-half btn btn-outline-primary btn-lg mt-5" href="${pageContext.request.contextPath}/user/account/admin/publications" ><fmt:message key="admin.cancel"/></a>
+            <a class="w-half btn btn-outline-primary btn-lg mt-5" href="${pageContext.request.contextPath}/admin/publications" ><fmt:message key="admin.cancel"/></a>
         </form>
     </div>
 </div>

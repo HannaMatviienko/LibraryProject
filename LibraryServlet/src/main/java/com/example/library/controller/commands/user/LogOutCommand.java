@@ -6,12 +6,14 @@ import com.example.library.model.entity.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class UserNewCommand implements Command {
+public class LogOutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        request.setAttribute("user", new User());
-        request.setAttribute("mode", 0);
-        return "/WEB-INF/jsp/user.jsp";
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.setAttribute("user", new User(0, User.ROLE.GUEST));
+        return "/WEB-INF/jsp/login.jsp";
     }
 }

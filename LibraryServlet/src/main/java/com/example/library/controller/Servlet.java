@@ -2,10 +2,10 @@ package com.example.library.controller;
 
 import com.example.library.controller.commands.Command;
 import com.example.library.controller.commands.IndexCommand;
+import com.example.library.controller.commands.admin.*;
 import com.example.library.controller.commands.author.*;
 import com.example.library.controller.commands.book.*;
-import com.example.library.controller.commands.librarian.LibrarianAccessUsersCommand;
-import com.example.library.controller.commands.librarian.LibrarianCommand;
+import com.example.library.controller.commands.librarian.*;
 import com.example.library.controller.commands.publication.*;
 import com.example.library.controller.commands.user.*;
 
@@ -29,7 +29,20 @@ public class Servlet extends HttpServlet {
     public void init(ServletConfig servletConfig) {
         commands = new HashMap<>();
         commands.put("/user/login", new LogInCommand());
+        commands.put("/user", new UserBooksCommand());
+        commands.put("/user/logout", new LogOutCommand());
+        commands.put("/user/signup", new SignUpCommand());
+        commands.put("/user/new", new UserNewBookCommand());
+        commands.put("/user/order", new UserOrderCommand());
+        commands.put("/user/delete", new UserDeleteOrderBookCommand());
+        commands.put("/user/return", new UserReturnBookCommand());
+
         commands.put("/admin", new AdminCommand());
+        commands.put("/admin/users", new AdminUsersCommand());
+        commands.put("/admin/users/delete", new AdminUserDeleteCommand());
+        commands.put("/admin/users/edit", new AdminUserEditCommand());
+        commands.put("/admin/users/new", new AdminUserNewCommand());
+        commands.put("/admin/users/save", new AdminUserSaveCommand());
 
         commands.put("/admin/authors", new AuthorsCommand());
         commands.put("/admin/authors/delete", new AuthorDeleteCommand());
@@ -49,17 +62,12 @@ public class Servlet extends HttpServlet {
         commands.put("/admin/publications/new", new PublicationNewCommand());
         commands.put("/admin/publications/save", new PublicationSaveCommand());
 
-        commands.put("/admin/users", new UsersCommand());
         commands.put("/librarian", new LibrarianCommand());
-        commands.put("/librarian/ordered", new OrderedBooksCommand());
+        commands.put("/librarian/approve", new LibrarianApproveOrderCommand());
+        commands.put("/librarian/cancel", new LibrarianCancelOrderCommand());
+        commands.put("/librarian/ordered", new LibrarianOrderedBooksCommand());
         commands.put("/librarian/users", new LibrarianAccessUsersCommand());
 
-        commands.put("/user", new UserCommand());
-        commands.put("/user/edit", new UserEditCommand());
-        commands.put("/user/new", new UserEditCommand());
-
-//        commands.put("/user/logout", new LogOutCommand());
-        //commands.put("/user/signup", new SignUpCommand());
 
 /*        commands.put("/order", new OrderCommand());
         commands.put("/order/checkout", new CheckOutCommand());

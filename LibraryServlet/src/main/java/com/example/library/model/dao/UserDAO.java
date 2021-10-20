@@ -1,12 +1,9 @@
 package com.example.library.model.dao;
 
-import com.example.library.model.entity.User;
+import com.example.library.model.entity.*;
 import com.example.library.tools.PBKDF2Hasher;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +26,7 @@ public class UserDAO {
             try {
                 if ((new PBKDF2Hasher()).checkPassword(password.toCharArray(), token)) {
                     user = new User();
-                    user.setId(result.getLong("id"));
+                    user.setId(result.getInt("id"));
                     user.setLastName(result.getString("last_name"));
                     user.setFirstName(result.getString("first_name"));
                     user.setEmail(email);
@@ -52,14 +49,13 @@ public class UserDAO {
     public User newUser(String firstName, String lastName, String email, String password) throws SQLException, ClassNotFoundException {
 
         Connection connection = ConnectionPool.getConnection();
-        String sql = "INSERT INTO users ( email, first_name, last_name, password, roles, enabled ) VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "INSERT INTO users ( email, first_name, last_name, password, role ) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, email);
         statement.setString(2, firstName);
         statement.setString(3, lastName);
         statement.setString(4, (new PBKDF2Hasher()).hash(password.toCharArray()));
         statement.setString(5, "ROLE_USER");
-        statement.setInt(6, 1);
 
         int result = statement.executeUpdate();
         if (result == 0) {
@@ -70,7 +66,7 @@ public class UserDAO {
         try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
             if (generatedKeys.next()) {
                 user = new User();
-                user.setId(generatedKeys.getLong(1));
+                user.setId(generatedKeys.getInt(1));
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 user.setEmail(email);
@@ -84,18 +80,17 @@ public class UserDAO {
         return user;
     }
 
-    public List<User> getUsers() throws SQLException,
-            ClassNotFoundException {
+    public List<User> getUsers() throws SQLException {
 
         Connection connection = ConnectionPool.getConnection();
-        String sql = "SELECT * FROM users WHERE roles = 'ROLE_USER'";
+        String sql = "SELECT * FROM users WHERE role = 'ROLE_USER'";
         PreparedStatement statement = connection.prepareStatement(sql);
 
         ResultSet result = statement.executeQuery();
         List<User> list = new ArrayList<>();
         while (result.next()) {
             User user = new User();
-            user.setId(result.getLong("id"));
+            user.setId(result.getInt("id"));
             user.setLastName(result.getString("last_name"));
             user.setFirstName(result.getString("first_name"));
             user.setEmail(result.getString("email"));
@@ -116,7 +111,7 @@ public class UserDAO {
         List<User> list = new ArrayList<>();
         while (result.next()) {
             User user = new User();
-            user.setId(result.getLong("id"));
+            user.setId(result.getInt("id"));
             user.setLastName(result.getString("last_name"));
             user.setFirstName(result.getString("first_name"));
             user.setEmail(result.getString("email"));
@@ -138,11 +133,11 @@ public class UserDAO {
         User user = null;
         if (result.next()) {
             user = new User();
-            user.setId(result.getLong("id"));
+            user.setId(result.getInt("id"));
             user.setLastName(result.getString("last_name"));
             user.setFirstName(result.getString("first_name"));
             user.setEmail(result.getString("email"));
-            user.setRole(User.ROLE.parseRole(result.getString("roles")));
+            user.setRole(User.ROLE.parseRole(result.getString("role")));
         }
         connection.close();
         return user;
@@ -159,7 +154,7 @@ public class UserDAO {
         List<User> list = new ArrayList<>();
         while (result.next()) {
             User user = new User();
-            user.setId(result.getLong("id"));
+            user.setId(result.getInt("id"));
             user.setLastName(result.getString("last_name"));
             user.setFirstName(result.getString("first_name"));
             user.setEmail(result.getString("email"));
@@ -174,19 +169,18 @@ public class UserDAO {
         Connection connection = ConnectionPool.getConnection();
         String sql;
         if (user.getId() == -1)
-            sql = "INSERT INTO users (email, enabled, first_name, last_name, password, roles) VALUES (?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO users (email, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?)";
         else
-            sql = "UPDATE users SET email = ?, enabled = ?, first_name = ?, last_name = ?, password = ?, roles = ? WHERE id = ?";
+            sql = "UPDATE users SET email = ?, first_name = ?, last_name = ?, password = ?, role = ? WHERE id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, user.getEmail());
-        statement.setInt(2, 1);
-        statement.setString(3, user.getFirstName());
-        statement.setString(4, user.getLastName());
-        statement.setString(5, user.getPassword());
-        statement.setString(6, user.getRole().toString());
+        statement.setString(2, user.getFirstName());
+        statement.setString(3, user.getLastName());
+        statement.setString(4, user.getPassword());
+        statement.setString(5, user.getRole().toString());
         if (user.getId() != -1)
-            statement.setLong(7, user.getId());
+            statement.setLong(6, user.getId());
 
         int result = statement.executeUpdate();
         if (result == 0) {
@@ -207,5 +201,185 @@ public class UserDAO {
             throw new SQLException("Deleting user failed, no rows affected.");
         }
         connection.close();
+    }
+
+    public List<UserBook> getBooks(long userId) throws SQLException,
+            ClassNotFoundException {
+
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "SELECT * FROM user_books WHERE user_id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, userId);
+
+        ResultSet result = statement.executeQuery();
+
+        List<UserBook> list = new ArrayList<>();
+
+        while (result.next()) {
+            UserBook item = new UserBook();
+            item.setId(result.getInt("id"));
+            item.setBook(DAOFactory.getBook().get(result.getInt("book_id"), connection));
+            item.setStatus(result.getInt("status"));
+            item.setDateTake(result.getDate("date_take"));
+            item.setDateBack(result.getDate("date_back"));
+            item.setDateActual(result.getDate("date_actual"));
+            list.add(item);
+        }
+        connection.close();
+        return list;
+    }
+
+    public List<UserBook> getBooksStatus(int status) throws SQLException,
+            ClassNotFoundException {
+
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "SELECT * FROM user_books WHERE status = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, status);
+
+        ResultSet result = statement.executeQuery();
+
+        List<UserBook> orders = new ArrayList<>();
+
+        while (result.next()) {
+            UserBook item = new UserBook();
+            item.setId(result.getInt("id"));
+            item.setBook(DAOFactory.getBook().get(result.getInt("book_id"), connection));
+            item.setStatus(result.getInt("status"));
+            orders.add(item);
+        }
+        connection.close();
+        return orders;
+    }
+
+    public void orderBook(int bookId, int userId) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "INSERT INTO user_books (user_id, book_id) VALUES (?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, userId);
+        statement.setInt(2, bookId);
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Ordering book failed, no rows affected.");
+        }
+        connection.close();
+    }
+
+    public void deleteOrderBook(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "DELETE FROM user_books WHERE id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Deleting book failed, no rows affected.");
+        }
+        connection.close();
+    }
+
+    public void confirmOrderedBook(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "UPDATE user_books SET status = 1, date_take = curdate(), date_back = DATE_ADD(curdate(), INTERVAL 14 DAY) WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Ordering book failed, no rows affected.");
+        }
+        connection.close();
+    }
+
+    public void returnBook(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "UPDATE user_books SET status = 2, date_actual = curdate() WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+
+        int result = statement.executeUpdate();
+        if (result == 0)
+            throw new SQLException("Returning book failed, no rows affected.");
+
+        checkFine(connection, id);
+        connection.close();
+    }
+
+    public void checkFine(Connection connection, int id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT DATEDIFF(date_actual, date_back) AS days, user_id, book_id FROM user_books WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            int days = result.getInt("days");
+            int userId  = result.getInt("user_id");
+            int bookId = result.getInt("book_id");
+            if (days > 0)
+                saveFine(connection, userId, bookId, days * 12.5);
+        }
+    }
+
+    public void saveFine(Connection connection, int userId, int bookId, double wite) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO user_fines (user_id, book_id, wite) VALUES (?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, userId);
+        statement.setInt(2, bookId);
+        statement.setDouble(3, wite);
+        int result = statement.executeUpdate();
+        if (result == 0) {
+            throw new SQLException("Creating fine failed, no rows affected.");
+        }
+    }
+
+    public List<UserFine> getFines(long userId) throws SQLException,
+            ClassNotFoundException {
+
+        Connection connection = ConnectionPool.getConnection();
+        String sql =
+                "SELECT uf.id, uf.wite, uf.book_id," +
+                "b.name AS book_name, b.year_publication," +
+                "b.publication_id, p.name AS publication_name," +
+                "b.author_id, a.name AS author_name FROM user_fines uf" +
+                "join books b ON b.id = uf.book_id" +
+                "join publications p ON p.id = b.publication_id" +
+                "join authors a ON a.id = b.author_id" +
+                "WHERE uf.user_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, userId);
+
+        ResultSet result = statement.executeQuery();
+
+        List<UserFine> list = new ArrayList<>();
+
+        while (result.next()) {
+            UserFine item = new UserFine();
+            item.setId(result.getInt("id"));
+            item.setWite(result.getDouble("wite"));
+
+            Book book = new Book();
+            book.setId(result.getInt("book_id"));
+            book.setName(result.getString("book_name"));
+            book.setYearPublication(result.getInt("year_publication"));
+
+            Author author = new Author();
+            author.setId(result.getInt("author_id"));
+            author.setName(result.getString("author_name"));
+
+            Publication publication = new Publication();
+            publication.setId(result.getInt("publication_id"));
+            publication.setName(result.getString("publication_name"));
+
+            book.setAuthor(author);
+            book.setPublication(publication);
+            item.setBook(book);
+
+            list.add(item);
+        }
+        connection.close();
+        return list;
     }
 }

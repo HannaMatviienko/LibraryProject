@@ -1,6 +1,5 @@
 package com.example.library.model.dao;
 
-import com.example.library.model.entity.Author;
 import com.example.library.model.entity.Publication;
 
 import java.sql.Connection;

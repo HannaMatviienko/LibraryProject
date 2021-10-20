@@ -65,18 +65,32 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${users}" var="item">
+        <c:forEach items="${users}" var="user">
         <tr>
-            <td class="text-center">${item.firstName}</td>
-            <td class="text-center">${item.lastName}</td>
-            <td class="text-center">${item.email}</td>
-            <td class="text-center">${item.role}</td>
+            <td class="text-center">${user.firstName}</td>
+            <td class="text-center">${user.lastName}</td>
+            <td class="text-center">${user.email}</td>
+            <td class="text-center">
+                <c:choose>
+                    <c:when test="${user.role.toString() == 'ROLE_ADMIN'}">
+                        <fmt:message key="admin.admin"/>
+                    </c:when>
+
+                    <c:when test="${user.role.toString() == 'ROLE_LIBRARIAN'}">
+                        <fmt:message key="librarian.librarian"/>
+                    </c:when>
+
+                    <c:when test="${user.role.toString() == 'ROLE_USER'}">
+                        <fmt:message key="admin.user"/>
+                    </c:when>
+                </c:choose>
+            </td>
             <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
                                         class="btn btn-sm btn-outline-success me-2"><fmt:message key="admin.edit"/></a></td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/delete?id=${user.id}"
                                         class="btn btn-sm btn-outline-danger me-2"><fmt:message key="admin.delete"/></a></td>
-            </c:forEach>
         </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

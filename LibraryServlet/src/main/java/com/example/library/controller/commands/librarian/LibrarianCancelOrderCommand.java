@@ -1,27 +1,22 @@
-package com.example.library.controller.commands.book;
+package com.example.library.controller.commands.librarian;
 
 import com.example.library.controller.commands.Command;
 import com.example.library.model.dao.DAOFactory;
-import com.example.library.model.entity.Book;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-public class BookEditCommand implements Command {
+public class LibrarianCancelOrderCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Book book = DAOFactory.getBook().get(id, null);
-            request.setAttribute("book", book);
-            request.setAttribute("authors", DAOFactory.getAuthor().getAll());
-            request.setAttribute("publications", DAOFactory.getPublication().getAll());
+            DAOFactory.getUser().deleteOrderBook(id);
         } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
-            throw new ServletException(ex);
+            return "redirect:/librarian/ordered?error";
         }
-        request.setAttribute("mode", 1);
-        return "/WEB-INF/jsp/book.jsp";
+        return "redirect:/librarian/ordered";
     }
 }

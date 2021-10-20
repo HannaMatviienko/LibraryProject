@@ -6,14 +6,6 @@ public class DAOFactory {
     private DAOFactory() {
     }
 
-    private static AccountDAO accountDAO = null;
-
-    public static AccountDAO getAccount() {
-        if (accountDAO == null)
-            accountDAO = new AccountDAO();
-        return accountDAO;
-    }
-
     private static AuthorDAO authorDAO = null;
 
     public static AuthorDAO getAuthor() {

@@ -13,7 +13,7 @@ public class User {
         password = "";
     }
 
-    public User(long id, ROLE role) {
+    public User(int id, ROLE role) {
         this.setId(id);
         this.setRole(role);
     }
@@ -48,11 +48,11 @@ public class User {
         this.role = role;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -124,7 +124,7 @@ public class User {
 
     private ROLE role;
 
-    private long id;
+    private int id;
 
     private String firstName;
 

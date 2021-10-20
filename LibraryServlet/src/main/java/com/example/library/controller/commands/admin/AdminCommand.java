@@ -1,4 +1,4 @@
-package com.example.library.controller.commands.book;
+package com.example.library.controller.commands.admin;
 
 import com.example.library.controller.commands.Command;
 import com.example.library.model.dao.DAOFactory;
@@ -8,17 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-public class OrderedBooksCommand implements Command {
+public class AdminCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try
         {
-            request.setAttribute("orderedBooks", DAOFactory.getAccount().getOrder(0));
+            request.setAttribute("users", DAOFactory.getUser().get());
+            request.setAttribute("books", DAOFactory.getBook().getAll());
+            request.setAttribute("publication", DAOFactory.getPublication().getAll());
+            request.setAttribute("author", DAOFactory.getAuthor().getAll());
         }
         catch (SQLException |ClassNotFoundException ex)
         {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/orders.jsp";
+        return "/WEB-INF/jsp/admin.jsp";
     }
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 public class DateDAO {
     public String getNow()
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }

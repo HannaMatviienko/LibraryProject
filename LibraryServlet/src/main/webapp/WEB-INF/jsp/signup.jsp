@@ -25,21 +25,7 @@
                class="btn ${sessionScope.lang == 'ua' ? "btn-outline-secondary" : "btn-outline-primary"} btn-sm"><fmt:message
                     key="lang.en"/></a>
         </div>
-
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-primary"><fmt:message
-                    key="menu.home"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-dark"><fmt:message
-                    key="menu.services"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-dark"><fmt:message
-                    key="menu.pricing"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-dark"><fmt:message
-                    key="menu.about"/></a></li>
-        </ul>
-
-        <div class="col-md-3 text-end">
-        </div>
-    </header>
+        </header>
 </div>
 
 <div class="container col-xxl-5 py-3">
@@ -59,16 +45,6 @@
                     <input type="text" class="form-control" id="lastName" name="lastName" value="${lastName}" required>
                     <div class="invalid-feedback">
                         <fmt:message key="signin.lastname.feedback"/>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <label for="userName" class="form-label"><fmt:message key="signin.username"/></label>
-                    <div class="input-group has-validation">
-                        <input type="text" class="form-control" id="userName" name="userName" value="${userName}" required>
-                        <div class="invalid-feedback">
-                            <fmt:message key="signin.username.feedback"/>
-                        </div>
                     </div>
                 </div>
 

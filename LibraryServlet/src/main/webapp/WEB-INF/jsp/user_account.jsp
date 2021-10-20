@@ -23,7 +23,7 @@
                     key="lang.en"/></a>
         </div>
         <div class="col-md-3 text-end">
-            <a href="${pageContext.request.contextPath}/admin/users/new"
+            <a href="${pageContext.request.contextPath}/user/new"
                class="btn btn-primary me-2"><fmt:message key="book.order"/></a>
             <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-outline-primary"><fmt:message
                     key="menu.logout"/></a>
@@ -36,11 +36,12 @@
     <table class="table mt-4">
         <thead>
         <tr>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="book.title"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="author.name"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="publication.name"/></th>
-            <th class="text-center" style="width: 14.3%"><fmt:message key="year.publication"/></th>
-            <th class="text-center" style="width: 14.3%"></th>
+            <th class="text-center"><fmt:message key="book.title"/></th>
+            <th class="text-center"><fmt:message key="author.name"/></th>
+            <th class="text-center"><fmt:message key="publication.name"/></th>
+            <th class="text-center"><fmt:message key="year.publication"/></th>
+            <th class="text-center"><fmt:message key="date.returned" /> </th>
+            <th class="text-center" style="width: 10%"></th>
         </tr>
         </thead>
         <tbody>
@@ -53,21 +54,36 @@
 
                 <td class="text-center">
                     <c:choose>
+                        <c:when test="${item.status == 0}"> </td>
+                        </c:when>
+
+                        <c:when test="${item.status == 1}"> ${item.dateBack} </td>
+                        </c:when>
+
+                        <c:when test="${item.status == 2}"> ${item.dateActual} </td>
+                        </c:when>
+                    </c:choose>
+
+                </td>
+
+                <td class="text-center">
+                    <c:choose>
                         <c:when test="${item.status == 0}">
-                            <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                            <a href="${pageContext.request.contextPath}/user/delete?id=${item.id}"
                                 class="btn btn-sm btn-outline-danger me-2"><fmt:message key="book.remove"/></a> </td>
                         </c:when>
 
                         <c:when test="${item.status == 1}">
-                            <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                            <a href="${pageContext.request.contextPath}/user/return?id=${item.id}"
                                class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.return"/></a> </td>
                         </c:when>
 
                         <c:when test="${item.status == 2}">
-                            <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+                            <a href="${pageContext.request.contextPath}/user/order?id=${item.book.id}"
                                class="btn btn-sm btn-outline-secondary me-2"><fmt:message key="book.reorder"/></a>
                         </c:when>
                     </c:choose>
+
                 </td>
         </c:forEach>
             </tr>

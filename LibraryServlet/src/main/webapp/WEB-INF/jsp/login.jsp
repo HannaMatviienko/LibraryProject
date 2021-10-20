@@ -41,10 +41,6 @@
 
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-lg-5 py-5">
-        <div class="col-lg-7 text-center text-lg-start">
-            <img src="${pageContext.request.contextPath}/resources/images/taxi.png" class="img-responsive" alt="Taxi"
-                 width="500" height="500">
-        </div>
         <div class="col-md-10 mx-auto col-lg-5">
             <form action="login" method="post" class="needs-validation p-4 p-md-5 border rounded-3 bg-light" novalidate="">
 

@@ -60,9 +60,9 @@
             <td class="text-center">${item.book.author.name}</td>
             <td class="text-center">${item.book.publication.name}</td>
             <td class="text-center">${item.book.yearPublication}</td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}"
                                         class="btn btn-sm btn-outline-success me-2"><fmt:message key="librarian.confirm"/></a></td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/admin/users/edit?id=${user.id}"
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/cancel?id=${item.id}"
                                         class="btn btn-sm btn-outline-danger me-2"><fmt:message key="librarian.cancel"/></a></td>
 
             </c:forEach>

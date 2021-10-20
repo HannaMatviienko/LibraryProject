@@ -1,4 +1,4 @@
-package com.example.library.controller.commands.publication;
+package com.example.library.controller.commands.user;
 
 import com.example.library.controller.commands.Command;
 import com.example.library.model.dao.DAOFactory;
@@ -8,14 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-public class PublicationsCommand implements Command {
+public class UserReturnBookCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            request.setAttribute("publication", DAOFactory.getPublication().getAll());
-        } catch (SQLException | ClassNotFoundException ex) {
-            new ServletException(ex);
+            int id = Integer.parseInt(request.getParameter("id"));
+            DAOFactory.getUser().returnBook(id);
+        } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
+            return "redirect:/user?error";
         }
-        return "/WEB-INF/jsp/publications.jsp";
+        return "redirect:/user";
     }
 }

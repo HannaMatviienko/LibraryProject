@@ -12,6 +12,6 @@ public class AdminUserNewCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         request.setAttribute("user", new User());
         request.setAttribute("mode", 0);
-        return "/WEB-INF/jsp/user.jsp";
+        return "/WEB-INF/jsp/admin/user.jsp";
     }
 }

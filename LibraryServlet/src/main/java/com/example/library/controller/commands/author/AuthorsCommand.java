@@ -19,6 +19,6 @@ public class AuthorsCommand implements Command {
         {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/authors.jsp";
+        return "/WEB-INF/jsp/admin/authors.jsp";
     }
 }

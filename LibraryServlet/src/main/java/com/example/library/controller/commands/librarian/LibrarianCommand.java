@@ -9,6 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 public class LibrarianCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        return "/WEB-INF/jsp/librarian.jsp";
+        return "/WEB-INF/jsp/librarian/librarian.jsp";
     }
 }

@@ -13,6 +13,6 @@ public class PublicationNewCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         request.setAttribute("publication", new Publication());
         request.setAttribute("mode", 0);
-        return "/WEB-INF/jsp/publication.jsp";
+        return "/WEB-INF/jsp/admin/publication.jsp";
     }
 }

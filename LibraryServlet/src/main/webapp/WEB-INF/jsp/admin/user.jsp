@@ -113,6 +113,13 @@
                 </select>
             </div>
 
+            <div class="col-12">
+                <label for="role" class="form-label"><fmt:message key="admin.status"/></label>
+                <select class="form-select" id="status" name="status">
+                    <option ${user.status == 0 ? "selected" : ""} value="0"><fmt:message key="admin.block"/></option>
+                    <option ${user.status == 1 ? "selected" : ""} value="1"><fmt:message key="admin.unblock"/></option>
+                </select>
+            </div>
 
             <button class="w-half btn btn-primary btn-lg mt-5" type="submit"><fmt:message key="admin.save"/></button>
             <a class="w-half btn btn-outline-primary btn-lg mt-5" href="${pageContext.request.contextPath}/admin/users" ><fmt:message key="admin.cancel"/></a>

@@ -20,6 +20,6 @@ public class AuthorEditCommand implements Command {
             throw new ServletException(ex);
         }
         request.setAttribute("mode", 1);
-        return "/WEB-INF/jsp/author.jsp";
+        return "/WEB-INF/jsp/admin/author.jsp";
     }
 }

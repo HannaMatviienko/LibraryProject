@@ -48,6 +48,11 @@
                     <c:if test="${error}">
                         <div class="alert alert-danger" role="alert"><fmt:message key="login.error"/></div>
                     </c:if>
+
+                    <c:if test="${unavailable}">
+                        <div class="alert alert-danger" role="alert"><fmt:message key="login.unavailable"/></div>
+                    </c:if>
+
                 </div>
 
                 <div class="form-floating mb-3">

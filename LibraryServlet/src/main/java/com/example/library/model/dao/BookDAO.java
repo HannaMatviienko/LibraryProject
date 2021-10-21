@@ -65,6 +65,30 @@ public class BookDAO {
         return list;
     }
 
+    public List <Book> getUserBooks() throws SQLException,
+            ClassNotFoundException {
+        Connection connection = ConnectionPool.getConnection();
+        String sql = "SELECT * FROM books WHERE available > 0";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        ResultSet result = statement.executeQuery();
+        List<Book> list = new ArrayList<>();
+
+        while (result.next()){
+            Book book = new Book();
+            book.setId(result.getInt("id"));
+            book.setName(result.getString("name"));
+            book.setAuthor(DAOFactory.getAuthor().get(result.getInt("author_id"), connection));
+            book.setPublication(DAOFactory.getPublication().get(result.getInt("publication_id"), connection));
+            book.setYearPublication(result.getInt("year_publication"));
+            book.setNumberOf((result.getInt("number_of")));
+            list.add(book);
+        }
+
+        connection.close();
+        return list;
+    }
+
     public void save(Book book) throws SQLException, ClassNotFoundException {
         Connection connection = ConnectionPool.getConnection();
         String sql;

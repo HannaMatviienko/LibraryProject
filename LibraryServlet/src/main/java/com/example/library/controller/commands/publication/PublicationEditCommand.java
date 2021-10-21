@@ -20,6 +20,6 @@ public class PublicationEditCommand implements Command {
             throw new ServletException(ex);
         }
         request.setAttribute("mode", 1);
-        return "/WEB-INF/jsp/publication.jsp";
+        return "/WEB-INF/jsp/admin/publication.jsp";
     }
 }

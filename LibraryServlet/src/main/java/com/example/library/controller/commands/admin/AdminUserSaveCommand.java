@@ -21,6 +21,7 @@ public class AdminUserSaveCommand implements Command {
             user.setLastName(request.getParameter("lastName"));
             user.setPassword(new PBKDF2Hasher().hash(request.getParameter("password").toCharArray()));
             user.setRole(User.ROLE.parseRole(request.getParameter("role")));
+            user.setStatus(request.getParameter("status"));
             DAOFactory.getUser().save(user);
         } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
             throw new ServletException(ex);

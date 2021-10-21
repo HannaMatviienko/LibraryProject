@@ -11,6 +11,7 @@ public class User {
         lastName = "";
         email = "";
         password = "";
+        status = "";
     }
 
     public User(int id, ROLE role) {
@@ -88,6 +89,10 @@ public class User {
         this.password = password;
     }
 
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
     public enum ROLE {
         USER, LIBRARIAN, ADMIN, GUEST;
 
@@ -133,6 +138,8 @@ public class User {
     private String email;
 
     private String password;
+
+    private String status;
 
     public String getScreenName()
     {

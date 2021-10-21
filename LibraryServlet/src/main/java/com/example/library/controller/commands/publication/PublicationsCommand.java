@@ -16,6 +16,6 @@ public class PublicationsCommand implements Command {
         } catch (SQLException | ClassNotFoundException ex) {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/publications.jsp";
+        return "/WEB-INF/jsp/admin/publications.jsp";
     }
 }

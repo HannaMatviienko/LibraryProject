@@ -56,10 +56,11 @@
     <table class="table mt-4">
         <thead>
         <tr>
-            <th class="text-center" style="width: 25%"><fmt:message key="signin.firstname"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="signin.lastname"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="login.email"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="admin.role"/></th>
+            <th class="text-center"><fmt:message key="signin.firstname"/></th>
+            <th class="text-center"><fmt:message key="signin.lastname"/></th>
+            <th class="text-center"><fmt:message key="login.email"/></th>
+            <th class="text-center"><fmt:message key="admin.role"/></th>
+            <th class="text-center"><fmt:message key="admin.status"/></th>
             <th class="text-center" style="width: 5%"></th>
             <th class="text-center" style="width: 5%"></th>
         </tr>
@@ -82,6 +83,17 @@
 
                     <c:when test="${user.role.toString() == 'ROLE_USER'}">
                         <fmt:message key="admin.user"/>
+                    </c:when>
+                </c:choose>
+            </td>
+            <td class="text-center">
+                <c:choose>
+                    <c:when test="${user.status == 0}">
+                        <fmt:message key="user.unavailable"/>
+                    </c:when>
+
+                    <c:when test="${user.status == 1}">
+                        <fmt:message key="user.available"/>
                     </c:when>
                 </c:choose>
             </td>

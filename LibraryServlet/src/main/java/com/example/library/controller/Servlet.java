@@ -36,6 +36,7 @@ public class Servlet extends HttpServlet {
         commands.put("/user/order", new UserOrderCommand());
         commands.put("/user/delete", new UserDeleteOrderBookCommand());
         commands.put("/user/return", new UserReturnBookCommand());
+        commands.put("/user/pay", new UserPayFineCommand());
 
         commands.put("/admin", new AdminCommand());
         commands.put("/admin/users", new AdminUsersCommand());
@@ -67,24 +68,6 @@ public class Servlet extends HttpServlet {
         commands.put("/librarian/cancel", new LibrarianCancelOrderCommand());
         commands.put("/librarian/ordered", new LibrarianOrderedBooksCommand());
         commands.put("/librarian/users", new LibrarianAccessUsersCommand());
-
-
-/*        commands.put("/order", new OrderCommand());
-        commands.put("/order/checkout", new CheckOutCommand());
-
-        commands.put("/admin/orders", new OrdersCommand());
-
-        commands.put("/admin/cars", new CarsCommand());
-        commands.put("/admin/cars/edit", new CarEditCommand());
-        commands.put("/admin/cars/del", new CarDeleteCommand());
-        commands.put("/admin/cars/new", new CarNewCommand());
-        commands.put("/admin/cars/save", new CarSaveCommand());
-
-        commands.put("/admin/users", new UsersCommand());
-        commands.put("/admin/users/edit", new UserEditCommand());
-        commands.put("/admin/users/del", new UserDeleteCommand());
-        commands.put("/admin/users/new", new UserNewCommand());
-        commands.put("/admin/users/save", new UserSaveCommand());*/
     }
 
     @Override

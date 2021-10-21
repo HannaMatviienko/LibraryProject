@@ -19,6 +19,6 @@ public class BooksCommand implements Command {
         {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/books.jsp";
+        return "/WEB-INF/jsp/admin/books.jsp";
     }
 }

@@ -16,6 +16,6 @@ public class UserNewBookCommand implements Command {
         } catch (SQLException | ClassNotFoundException ex) {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/order.jsp";
+        return "/WEB-INF/jsp/user/order.jsp";
     }
 }

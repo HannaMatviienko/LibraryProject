@@ -20,9 +20,10 @@ public class SignUpCommand implements Command {
             String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String status = request.getParameter("status");
 
             try {
-                User user = DAOFactory.getUser().newUser(firstName, lastName, email, password);
+                User user = DAOFactory.getUser().newUser(firstName, lastName, email, password, status);
                 if (user != null) {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
@@ -36,7 +37,8 @@ public class SignUpCommand implements Command {
                     request.setAttribute("lastName", lastName);
                     request.setAttribute("email", email);
                     request.setAttribute("password", password);
-                    return "/WEB-INF/jsp/signup.jsp";
+                    request.setAttribute("status", status);
+                    return "/WEB-INF/jsp/user/signup.jsp";
                 }
             } catch (SQLException | ClassNotFoundException ex) {
                 throw new ServletException(ex);

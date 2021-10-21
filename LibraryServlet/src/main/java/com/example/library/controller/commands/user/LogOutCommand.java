@@ -14,6 +14,6 @@ public class LogOutCommand implements Command {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         session.setAttribute("user", new User(0, User.ROLE.GUEST));
-        return "/WEB-INF/jsp/login.jsp";
+        return "/WEB-INF/jsp/user/login.jsp";
     }
 }

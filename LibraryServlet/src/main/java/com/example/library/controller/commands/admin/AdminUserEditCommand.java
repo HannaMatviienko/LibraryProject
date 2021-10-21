@@ -20,6 +20,6 @@ public class AdminUserEditCommand implements Command {
             throw new ServletException(ex);
         }
         request.setAttribute("mode", 1);
-        return "/WEB-INF/jsp/user.jsp";
+        return "/WEB-INF/jsp/admin/user.jsp";
     }
 }

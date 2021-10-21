@@ -6,6 +6,8 @@ public class UserBook {
     private int id;
     private Book book;
     private int status;
+    private double fine;
+    private int days;
     private Date dateTake;
     private Date dateBack;
     private Date dateActual;
@@ -29,6 +31,14 @@ public class UserBook {
     public int getStatus() { return status; }
 
     public void setStatus(int status) { this.status = status; }
+
+    public double getFine() { return fine; }
+
+    public void setFine(double fine) { this.fine = fine; }
+
+    public int getDays() { return days; }
+
+    public void setDays(int days) { this.days = days; }
 
     public Date getDateTake() { return dateTake; }
 

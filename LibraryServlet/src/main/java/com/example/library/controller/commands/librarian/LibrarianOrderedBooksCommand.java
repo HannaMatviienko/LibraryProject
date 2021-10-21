@@ -16,6 +16,6 @@ public class LibrarianOrderedBooksCommand implements Command {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }
-        return "/WEB-INF/jsp/orders.jsp";
+        return "/WEB-INF/jsp/librarian/orders.jsp";
     }
 }

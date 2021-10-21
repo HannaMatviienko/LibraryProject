@@ -22,6 +22,6 @@ public class AdminCommand implements Command {
         {
             new ServletException(ex);
         }
-        return "/WEB-INF/jsp/admin.jsp";
+        return "/WEB-INF/jsp/admin/admin.jsp";
     }
 }

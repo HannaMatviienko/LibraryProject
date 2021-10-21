@@ -24,10 +24,12 @@ public class UserBooksCommand implements Command {
 
             UserDAO dao = DAOFactory.getUser();
             List<UserBook> books = dao.getBooks(user.getId());
+            List<UserBook> fines = dao.getFines(user.getId());
             request.setAttribute("books", books);
+            request.setAttribute("fines", fines);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }
-        return "/WEB-INF/jsp/user_account.jsp";
+        return "/WEB-INF/jsp/user/user_account.jsp";
     }
 }

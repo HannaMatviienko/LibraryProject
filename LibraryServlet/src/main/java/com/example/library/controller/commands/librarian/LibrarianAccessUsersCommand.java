@@ -13,7 +13,7 @@ public class LibrarianAccessUsersCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             request.setAttribute("users", DAOFactory.getUser().getRole());
-            return "/WEB-INF/jsp/librarian_users.jsp";
+            return "/WEB-INF/jsp/librarian/librarian_users.jsp";
         } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }

@@ -14,6 +14,6 @@ public class AuthorNewCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         request.setAttribute("author", new Author());
         request.setAttribute("mode", 0);
-        return "/WEB-INF/jsp/author.jsp";
+        return "/WEB-INF/jsp/admin/author.jsp";
     }
 }

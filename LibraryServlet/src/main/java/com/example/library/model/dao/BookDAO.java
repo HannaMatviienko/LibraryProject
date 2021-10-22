@@ -1,6 +1,7 @@
 package com.example.library.model.dao;
 
 import com.example.library.model.entity.Book;
+import com.example.library.model.entity.Page;
 
 
 import java.sql.Connection;
@@ -41,8 +42,10 @@ public class BookDAO {
         return book;
     }
 
-    public List <Book> getAll() throws SQLException,
+    public List <Book> getAll(Page page) throws SQLException,
             ClassNotFoundException {
+
+
         Connection connection = ConnectionPool.getConnection();
         String sql = "SELECT * FROM books";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -60,6 +63,9 @@ public class BookDAO {
             book.setNumberOf((result.getInt("number_of")));
             list.add(book);
         }
+
+        if (page != null)
+            page.setPageCount(3);
 
         connection.close();
         return list;

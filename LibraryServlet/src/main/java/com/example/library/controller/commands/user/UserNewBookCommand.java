@@ -12,7 +12,7 @@ public class UserNewBookCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            request.setAttribute("books", DAOFactory.getBook().getAll());
+            request.setAttribute("books", DAOFactory.getBook().getAll(null));
         } catch (SQLException | ClassNotFoundException ex) {
             new ServletException(ex);
         }

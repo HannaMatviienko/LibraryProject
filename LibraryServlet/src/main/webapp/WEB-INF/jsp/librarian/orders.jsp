@@ -51,6 +51,7 @@
             <th class="text-center" style="width: 16.6%"><fmt:message key="year.publication"/></th>
             <th class="text-center" style="width: 5%"></th>
             <th class="text-center" style="width: 5%"></th>
+            <th class="text-center" style="width: 5%"></th>
         </tr>
         </thead>
         <tbody>
@@ -60,8 +61,10 @@
             <td class="text-center">${item.book.author.name}</td>
             <td class="text-center">${item.book.publication.name}</td>
             <td class="text-center">${item.book.yearPublication}</td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}"
-                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="librarian.confirm"/></a></td>
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}&location=0"
+                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.on.hand"/></a></td>
+            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}&location=1"
+                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.reading.room"/></a></td>
             <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/cancel?id=${item.id}"
                                         class="btn btn-sm btn-outline-danger me-2"><fmt:message key="librarian.cancel"/></a></td>
 

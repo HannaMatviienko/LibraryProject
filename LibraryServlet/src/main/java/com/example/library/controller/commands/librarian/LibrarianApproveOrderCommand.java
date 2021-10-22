@@ -14,7 +14,8 @@ public class LibrarianApproveOrderCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            DAOFactory.getUser().confirmOrderedBook(id);
+            int location = Integer.parseInt(request.getParameter("location"));
+            DAOFactory.getUser().confirmOrderedBook(id, location);
         } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
             throw new ServletException(ex);
         }

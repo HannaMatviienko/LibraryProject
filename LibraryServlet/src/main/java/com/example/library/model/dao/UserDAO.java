@@ -292,11 +292,12 @@ public class UserDAO {
         connection.close();
     }
 
-    public void confirmOrderedBook(int id) throws SQLException, ClassNotFoundException {
+    public void confirmOrderedBook(int id, int location) throws SQLException, ClassNotFoundException {
         Connection connection = ConnectionPool.getConnection();
-        String sql = "UPDATE user_books SET status = 1, date_take = curdate(), date_back = DATE_ADD(curdate(), INTERVAL 14 DAY) WHERE id = ?";
+        String sql = "UPDATE user_books SET status = 1, location = ?, date_take = curdate(), date_back = DATE_ADD(curdate(), INTERVAL 14 DAY) WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
+        statement.setInt(2, location);
 
         int result = statement.executeUpdate();
         if (result == 0) {

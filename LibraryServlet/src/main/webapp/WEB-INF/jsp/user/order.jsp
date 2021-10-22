@@ -60,7 +60,6 @@
             <th style="width: 15%"><fmt:message key="author.name"/></th>
             <th style="width: 15%"><fmt:message key="publication.name"/></th>
             <th class="text-center" style="width: 15%"><fmt:message key="year.publication"/></th>
-            <th class="text-center" style="width: 10%"><fmt:message key="number.books"/></th>
             <th class="text-center" style="width: 10%"></th>
 
         </tr>
@@ -72,7 +71,6 @@
             <td>${book.author.name}</td>
             <td>${book.publication.name}</td>
             <td class="text-center">${book.yearPublication}</td>
-            <td class="text-center">${book.numberOf}</td>
             <td class="text-end">
                 <a href="${pageContext.request.contextPath}/user/order?id=${book.id}"
                    class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.order"/></a>

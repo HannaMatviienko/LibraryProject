@@ -6,6 +6,7 @@ public class UserBook {
     private int id;
     private Book book;
     private int status;
+    private int location;
     private double fine;
     private int days;
     private Date dateTake;
@@ -31,6 +32,10 @@ public class UserBook {
     public int getStatus() { return status; }
 
     public void setStatus(int status) { this.status = status; }
+
+    public int getLocation() { return location; }
+
+    public void setLocation(int location) { this.location = location; }
 
     public double getFine() { return fine; }
 

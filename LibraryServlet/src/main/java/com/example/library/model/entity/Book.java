@@ -5,6 +5,7 @@ public class Book {
     private String name;
     private int yearPublication;
     private int numberOf;
+    private int available;
     private Author author;
     private Publication publication;
 
@@ -44,6 +45,10 @@ public class Book {
     public void setNumberOf(int numberOf) {
         this.numberOf = numberOf;
     }
+
+    public int getAvailable() { return available; }
+
+    public void setAvailable(int available) { this.available = available; }
 
     public Author getAuthor() {
         return author;

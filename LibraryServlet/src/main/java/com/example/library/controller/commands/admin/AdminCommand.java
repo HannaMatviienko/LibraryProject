@@ -14,7 +14,7 @@ public class AdminCommand implements Command {
         try
         {
             request.setAttribute("users", DAOFactory.getUser().get());
-            request.setAttribute("books", DAOFactory.getBook().getAll(null));
+            request.setAttribute("books", DAOFactory.getBook().getAll(null, false));
             request.setAttribute("publication", DAOFactory.getPublication().getAll());
             request.setAttribute("author", DAOFactory.getAuthor().getAll());
         }

@@ -21,6 +21,6 @@ public class BookNewCommand implements Command {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }
-        return "/WEB-INF/jsp/book.jsp";
+        return "/WEB-INF/jsp/admin/book.jsp";
     }
 }

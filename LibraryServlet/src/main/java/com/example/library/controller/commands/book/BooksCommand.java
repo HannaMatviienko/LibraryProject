@@ -29,16 +29,38 @@ public class BooksCommand implements Command {
         if (p != null)
             page.setPage(Integer.parseInt(p));
 
-        try
-        {
-            request.setAttribute("books", DAOFactory.getBook().getAll(page));
+
+        String name = request.getParameter("name");
+        if (name != null) {
+            request.setAttribute("name", name);
+            page.addQuery("name", name);
+        }
+
+        String author_name = request.getParameter("author_name");
+        if (author_name != null) {
+            request.setAttribute("author_name", author_name);
+            page.addQuery("author_name", author_name);
+        }
+
+        String publication_name = request.getParameter("publication_name");
+        if (publication_name != null) {
+            request.setAttribute("publication_name", publication_name);
+            page.addQuery("publication_name", publication_name);
+        }
+
+        String year_publication = request.getParameter("year_publication");
+        if (year_publication != null) {
+            request.setAttribute("year_publication", year_publication);
+            page.addQuery("year_publication", year_publication);
+        }
+
+        try {
+            request.setAttribute("books", DAOFactory.getBook().getAll(page, false));
             request.setAttribute("scol", page.getColumn());
             request.setAttribute("sdir", page.getDirection());
             request.setAttribute("page", page.getPage());
             request.setAttribute("pageCount", page.getPageCount());
-        }
-        catch (SQLException |ClassNotFoundException ex)
-        {
+        } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }
         return "/WEB-INF/jsp/admin/books.jsp";

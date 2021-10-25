@@ -93,6 +93,10 @@ public class User {
 
     public void setStatus(String status) { this.status = status; }
 
+    public String getScreenName() {
+        return getFirstName() + " " + getLastName();
+    }
+
     public enum ROLE {
         USER, LIBRARIAN, ADMIN, GUEST;
 
@@ -141,8 +145,4 @@ public class User {
 
     private String status;
 
-    public String getScreenName()
-    {
-        return getFirstName() + " " + getLastName();
-    }
 }

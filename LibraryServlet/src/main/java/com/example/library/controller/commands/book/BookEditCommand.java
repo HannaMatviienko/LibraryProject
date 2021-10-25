@@ -22,6 +22,6 @@ public class BookEditCommand implements Command {
             throw new ServletException(ex);
         }
         request.setAttribute("mode", 1);
-        return "/WEB-INF/jsp/book.jsp";
+        return "/WEB-INF/jsp/admin/book.jsp";
     }
 }

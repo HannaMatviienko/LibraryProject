@@ -27,6 +27,7 @@ public class UserBooksCommand implements Command {
             List<UserBook> fines = dao.getFines(user.getId());
             request.setAttribute("books", books);
             request.setAttribute("fines", fines);
+            request.setAttribute("user", user);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new ServletException(ex);
         }

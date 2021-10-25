@@ -5,3 +5,7 @@
 .sort_gray {
     color: silver;
 }
+
+td.buttons {
+    padding-right: 0;
+}

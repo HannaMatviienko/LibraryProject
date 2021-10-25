@@ -26,14 +26,9 @@
                     key="lang.en"/></a>
         </div>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-primary"><fmt:message key="menu.home"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-dark"><fmt:message key="menu.services"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-dark"><fmt:message key="menu.pricing"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link px-2 link-dark"><fmt:message key="menu.about"/></a></li>
-        </ul>
-
         <div class="col-md-3 text-end">
+            <a href="${pageContext.request.contextPath}/"
+               class="btn btn-primary me-2"><fmt:message key="admin.back"/></a>
         </div>
     </header>
 </div>

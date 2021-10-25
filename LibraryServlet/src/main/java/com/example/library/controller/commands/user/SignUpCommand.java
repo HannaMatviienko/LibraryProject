@@ -14,7 +14,7 @@ public class SignUpCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         if (request.getMethod().equals("GET")) {
-            return "/WEB-INF/jsp/signup.jsp";
+            return "/WEB-INF/jsp/user/signup.jsp";
         } else {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");

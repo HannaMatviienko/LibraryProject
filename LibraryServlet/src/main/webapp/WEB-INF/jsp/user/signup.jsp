@@ -25,6 +25,11 @@
                class="btn ${sessionScope.lang == 'ua' ? "btn-outline-secondary" : "btn-outline-primary"} btn-sm"><fmt:message
                     key="lang.en"/></a>
         </div>
+
+        <div class="col-md-3 text-end">
+            <a href="${pageContext.request.contextPath}/"
+               class="btn btn-primary me-2"><fmt:message key="admin.back"/></a>
+        </div>
         </header>
 </div>
 

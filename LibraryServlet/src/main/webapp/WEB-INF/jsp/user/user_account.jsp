@@ -1,3 +1,4 @@
+<%--@elvariable id="user" type="com.example.library.model.entity.User"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -66,6 +67,8 @@
 
 <h1 class="text-center"><fmt:message key="user.account"/></h1>
 <div class="container">
+    <p><fmt:message key="user.name"/>${user.screenName}</p>
+    <p><fmt:message key="user.email"/>${user.email}</p>
     <table class="table mt-4">
         <thead>
         <tr>
@@ -80,42 +83,50 @@
         <tbody>
         <%--@elvariable id="books" type="java.util.List"--%>
         <c:forEach items="${books}" var="item">
-        <tr>
+
+        <c:set var="status_back" value=""/>
+        <c:set var="status_text" value=""/>
+        <c:set var="status_date" value=""/>
+
+        <c:choose>
+            <c:when test="${item.status == 0}">
+                <c:set var="status_back" value="table-warning"/>
+            </c:when>
+            <c:when test="${item.status == 1}">
+                <c:set var="status_date" value="${item.dateBack}"/>
+            </c:when>
+            <c:when test="${item.status == 2}">
+<%--                <c:set var="status_back" value="table-secondary"/>--%>
+                <c:set var="status_text" value="text-secondary"/>
+                <c:set var="status_date" value="${item.dateActual}"/>
+            </c:when>
+        </c:choose>
+
+        <tr class="${status_back} ${status_text}">
             <td>${item.book.name}</td>
             <td>${item.book.author.name}</td>
             <td>${item.book.publication.name}</td>
             <td class="text-center">${item.book.yearPublication}</td>
+            <td class="text-center">${status_date}</td>
 
             <td class="text-center">
                 <c:choose>
-                <c:when test="${item.status == 0}"> </td>
-            </c:when>
+                    <c:when test="${item.status == 0}">
+                        <a href="${pageContext.request.contextPath}/user/delete?id=${item.id}"
+                           class="btn btn-sm btn-outline-danger me-2"><fmt:message key="book.remove"/></a>
+                    </c:when>
 
-            <c:when test="${item.status == 1}"> ${item.dateBack}
-            </c:when>
+                    <c:when test="${item.status == 1}">
+                        <a href="${pageContext.request.contextPath}/user/return?id=${item.id}"
+                           class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.return"/></a>
+                    </c:when>
 
-            <c:when test="${item.status == 2}"> ${item.dateActual}
-            </c:when>
-            </c:choose>
-
-
-            <td class="text-center">
-                <c:choose>
-                <c:when test="${item.status == 0}">
-                <a href="${pageContext.request.contextPath}/user/delete?id=${item.id}"
-                   class="btn btn-sm btn-outline-danger me-2"><fmt:message key="book.remove"/></a></td>
-            </c:when>
-
-            <c:when test="${item.status == 1}">
-                <a href="${pageContext.request.contextPath}/user/return?id=${item.id}"
-                   class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.return"/></a>
-            </c:when>
-
-            <c:when test="${item.status == 2}">
-                <a href="${pageContext.request.contextPath}/user/order?id=${item.book.id}"
-                   class="btn btn-sm btn-outline-secondary me-2"><fmt:message key="book.reorder"/></a>
-            </c:when>
-            </c:choose>
+                    <c:when test="${item.status == 2}">
+                        <a href="${pageContext.request.contextPath}/user/order?id=${item.book.id}"
+                           class="btn btn-sm btn-outline-secondary me-2"><fmt:message key="book.reorder"/></a>
+                    </c:when>
+                </c:choose>
+            </td>
 
             </c:forEach>
         </tr>

@@ -218,7 +218,7 @@ public class UserDAO {
             ClassNotFoundException {
 
         Connection connection = ConnectionPool.getConnection();
-        String sql = "SELECT * FROM user_books WHERE user_id = ? AND status <> 3";
+        String sql = "SELECT * FROM user_books WHERE user_id = ? AND status <> 3 ORDER BY status, date_take";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setLong(1, userId);
 
@@ -296,8 +296,8 @@ public class UserDAO {
         Connection connection = ConnectionPool.getConnection();
         String sql = "UPDATE user_books SET status = 1, location = ?, date_take = curdate(), date_back = DATE_ADD(curdate(), INTERVAL 14 DAY) WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
-        statement.setInt(2, location);
+        statement.setInt(1, location);
+        statement.setInt(2, id);
 
         int result = statement.executeUpdate();
         if (result == 0) {

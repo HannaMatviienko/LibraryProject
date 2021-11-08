@@ -44,7 +44,7 @@ public class UsersController {
     public String newUser(Model model) {
         UserDTO user = new UserDTO();
         user.setRole("ROLE_USER");
-        user.setStatus(0);
+        user.setStatus(1);
         model.addAttribute("user", user);
         model.addAttribute("mode", 0);
         return "user";
@@ -53,6 +53,7 @@ public class UsersController {
     @PostMapping("/admin/user/save")
     public String saveUser(UserDTO user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        System.out.println(user);
         userService.save(user);
         return "redirect:/admin/users";
     }

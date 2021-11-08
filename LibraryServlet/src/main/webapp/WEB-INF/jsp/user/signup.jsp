@@ -77,7 +77,7 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/js/taxi.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/validate.js"></script>
 
 </body>
 </html>

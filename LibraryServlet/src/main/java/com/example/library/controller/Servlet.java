@@ -38,7 +38,6 @@ public class Servlet extends HttpServlet {
         commands.put("/user/return", new UserReturnBookCommand());
         commands.put("/user/pay", new UserPayFineCommand());
 
-        commands.put("/admin", new AdminCommand());
         commands.put("/admin/users", new AdminUsersCommand());
         commands.put("/admin/users/delete", new AdminUserDeleteCommand());
         commands.put("/admin/users/edit", new AdminUserEditCommand());
@@ -63,11 +62,11 @@ public class Servlet extends HttpServlet {
         commands.put("/admin/publications/new", new PublicationNewCommand());
         commands.put("/admin/publications/save", new PublicationSaveCommand());
 
-        commands.put("/librarian", new LibrarianCommand());
         commands.put("/librarian/approve", new LibrarianApproveOrderCommand());
         commands.put("/librarian/cancel", new LibrarianCancelOrderCommand());
         commands.put("/librarian/ordered", new LibrarianOrderedBooksCommand());
         commands.put("/librarian/users", new LibrarianAccessUsersCommand());
+        commands.put("/librarian/accounts", new LibrarianAccountsCommand());
     }
 
     @Override

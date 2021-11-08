@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>[[#{home.title}]]</title>
+    <title>[[#{book.ordered}]]</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -18,20 +18,45 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-primary">[[#{menu.home}]]</a></li>
-            <li><a th:href="@{/common/service}" class="nav-link px-2 link-dark">[[#{menu.services}]]</a></li>
-            <li><a th:href="@{/common/price}" class="nav-link px-2 link-dark">[[#{menu.pricing}]]</a></li>
-            <li><a th:href="@{/common/about}" class="nav-link px-2 link-dark">[[#{menu.about}]]</a></li>
+            <li><a th:href="@{/librarian}" class="nav-link px-2 link-primary">[[#{book.ordered}]]</a></li>
+            <li><a th:href="@{/librarian/users}" class="nav-link px-2 link-dark">[[#{user.users}]]</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
-            <a th:href="@{/user/login}" class="btn btn-outline-primary me-2">[[#{menu.login}]]</a>
-            <a th:href="@{/user/signup}" class="btn btn-primary">[[#{menu.sign-up}]]</a>
+            <a th:href="@{/user/logout}" class="btn btn-outline-primary">[[#{menu.logout}]]</a>
         </div>
     </header>
 </div>
 
-<h1>Lib</h1>
+<h1 class="text-center">[[#{book.ordered}]]</h1>
 
+<div class="container">
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>[[#{book.title}]]</th>
+            <th style="width: 16.6%">[[#{author.name}]]</th>
+            <th style="width: 16.6%">[[#{publication.name}]]</th>
+            <th class="text-center" style="width: 7%">[[#{year.publication}]]</th>
+            <th class="text-center" style="width: 7%">[[#{book.available}]]</th>
+            <th class="text-center" style="width: 25%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${card}">
+            <td th:text="${item.book.name}"></td>
+            <td th:text="${item.book.author.name}"></td>
+            <td th:text="${item.book.publication.name}"></td>
+            <td class="text-center" th:text="${item.book.yearPublication}"></td>
+            <td class="text-center" th:text="${item.book.available}"></td>
+            <td class="text-end">
+                <a th:if="${item.book.available>0}" th:href="@{/librarian/confirm/card/0/{id}(id=${item.id})}" class="btn btn-sm btn-outline-success me-2">[[#{book.on.hand}]]</a>
+                <a th:if="${item.book.available>0}" th:href="@{/librarian/confirm/card/1/{id}(id=${item.id})}" class="btn btn-sm btn-outline-success me-2">[[#{book.reading.room}]]</a>
+                <a th:href="@{/librarian/cancel/card/{id}(id=${item.id})}" class="btn btn-sm btn-outline-danger me-2">[[#{admin.delete}]]</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

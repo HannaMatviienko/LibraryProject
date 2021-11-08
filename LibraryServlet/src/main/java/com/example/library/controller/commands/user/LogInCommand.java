@@ -26,9 +26,9 @@ public class LogInCommand implements Command {
                         request.setAttribute("email", user.getEmail());
 
                         if (user.getRole() == User.ROLE.ADMIN)
-                            return "redirect:/admin";
+                            return "redirect:/admin/users";
                         else if (user.getRole() == User.ROLE.LIBRARIAN)
-                            return "redirect:/librarian";
+                            return "redirect:/librarian/ordered";
                         else return "redirect:/user";
                     } else {
                         request.setAttribute("error", true);

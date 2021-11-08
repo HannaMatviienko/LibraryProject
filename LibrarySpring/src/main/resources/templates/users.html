@@ -18,10 +18,10 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a th:href="@{/admin/users}" class="nav-link px-2 link-primary">[[#{admin.users}]]</a></li>
-            <li><a th:href="@{/admin/books}" class="nav-link px-2 link-dark">[[#{admin.books}]]</a></li>
-            <li><a th:href="@{/admin/authors}" class="nav-link px-2 link-dark">[[#{admin.authors}]]</a></li>
-            <li><a th:href="@{/admin/publications}" class="nav-link px-2 link-dark">[[#{admin.publications}]]</a></li>
+            <li><a th:href="@{/admin/users}" class="nav-link px-2 link-primary">[[#{user.users}]]</a></li>
+            <li><a th:href="@{/admin/books}" class="nav-link px-2 link-dark">[[#{book.books}]]</a></li>
+            <li><a th:href="@{/admin/authors}" class="nav-link px-2 link-dark">[[#{author.authors}]]</a></li>
+            <li><a th:href="@{/admin/publications}" class="nav-link px-2 link-dark">[[#{publication.publications}]]</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
@@ -31,16 +31,17 @@
     </header>
 </div>
 
-<h1 class="text-center">[[#{admin.users}]]</h1>
+<h1 class="text-center">[[#{user.users}]]</h1>
 
 <div class="container">
     <table class="table mt-4">
         <thead>
         <tr>
-            <th style="width: 20%">[[#{signin.firstname}]]</th>
-            <th style="width: 20%">[[#{signin.lastname}]]</th>
-            <th style="width: 20%">[[#{login.email}]]</th>
-            <th style="width: 20%">[[#{admin.roles}]]</th>
+            <th>[[#{signin.firstname}]]</th>
+            <th>[[#{signin.lastname}]]</th>
+            <th>[[#{login.email}]]</th>
+            <th>[[#{admin.roles}]]</th>
+            <th>[[#{admin.status}]]</th>
             <th style="width: 20%"></th>
         </tr>
         </thead>
@@ -52,11 +53,15 @@
             <td>
                 <a th:if="${user.role} == 'ROLE_ADMIN'">[[#{admin.admin}]]</a>
                 <a th:if="${user.role} == 'ROLE_USER'">[[#{admin.user}]]</a>
-                <a th:if="${user.role} == 'ROLE_LIBRARIAN'">[[#{admin.librarian}]]</a>
+                <a th:if="${user.role} == 'ROLE_LIBRARIAN'">[[#{librarian.librarian}]]</a>
+            </td>
+            <td>
+                <a th:if="${user.status} == 0">[[#{user.unavailable}]]</a>
+                <a th:if="${user.status} == 1">[[#{user.available}]]</a>
             </td>
             <td class="text-end">
-                <a th:href="@{/admin/user/edit/{id}(id=${user.id})}" class="btn btn-sm btn-outline-primary me-2">[[#{admin.edit}]]</a>
-                <a th:href="@{/admin/user/del/{id}(id=${user.id})}" class="btn btn-sm btn-outline-primary">[[#{admin.delete}]]</a>
+                <a th:href="@{/admin/user/edit/{id}(id=${user.id})}" class="btn btn-sm btn-outline-success me-2">[[#{admin.edit}]]</a>
+                <a th:href="@{/admin/user/del/{id}(id=${user.id})}" class="btn btn-sm btn-outline-danger">[[#{admin.delete}]]</a>
             </td>
         </tr>
         </tbody>

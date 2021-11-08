@@ -28,8 +28,10 @@ public class UserDTO {
     @Column(length = 45, nullable = false, name = "last_name")
     private String lastName;
 
+    @Column(nullable = false)
     private int status;
 
+    @Column(nullable = false)
     private String role;
 
     @Override

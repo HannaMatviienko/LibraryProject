@@ -29,5 +29,9 @@
     </header>
 </div>
 
+<div class="col-sm-12 text-center">
+    <img src="resources/images/600_698.png" class="img-responsive" alt="Library" width="600" height="698">
+</div>
+
 </body>
 </html>

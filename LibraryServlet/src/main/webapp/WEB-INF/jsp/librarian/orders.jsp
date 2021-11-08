@@ -24,11 +24,10 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/librarian" class="nav-link px-2 link-dark"><fmt:message
-                    key="librarian.librarian"/></a></li>
             <li><a href="${pageContext.request.contextPath}/librarian/ordered"
                    class="nav-link px-2 link-primary"><fmt:message key="book.ordered"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/librarian/users" class="nav-link px-2 link-dark"><fmt:message
+            <li><a href="${pageContext.request.contextPath}/librarian/users"
+                   class="nav-link px-2 link-dark"><fmt:message
                     key="user.users"/></a></li>
         </ul>
 
@@ -45,31 +44,34 @@
     <table class="table mt-4">
         <thead>
         <tr>
-            <th class="text-center" style="width: 16.6%"><fmt:message key="book.title"/></th>
-            <th class="text-center" style="width: 16.6%"><fmt:message key="author.name"/></th>
-            <th class="text-center" style="width: 16.6%"><fmt:message key="publication.name"/></th>
-            <th class="text-center" style="width: 16.6%"><fmt:message key="year.publication"/></th>
-            <th class="text-center" style="width: 5%"></th>
-            <th class="text-center" style="width: 5%"></th>
-            <th class="text-center" style="width: 5%"></th>
+            <th><fmt:message key="book.title"/></th>
+            <th style="width: 16.6%"><fmt:message key="author.name"/></th>
+            <th style="width: 16.6%"><fmt:message key="publication.name"/></th>
+            <th class="text-center" style="width: 7%"><fmt:message key="year.publication"/></th>
+            <th class="text-center" style="width: 7%"><fmt:message key="user.available"/></th>
+            <th class="text-center" style="width: 25%"></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${orderedBooks}" var="item">
-        <tr>
-            <td class="text-center">${item.book.name}</td>
-            <td class="text-center">${item.book.author.name}</td>
-            <td class="text-center">${item.book.publication.name}</td>
-            <td class="text-center">${item.book.yearPublication}</td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}&location=0"
-                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.on.hand"/></a></td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}&location=1"
-                                        class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.reading.room"/></a></td>
-            <td class="text-center"> <a href="${pageContext.request.contextPath}/librarian/cancel?id=${item.id}"
-                                        class="btn btn-sm btn-outline-danger me-2"><fmt:message key="librarian.cancel"/></a></td>
-
-            </c:forEach>
-        </tr>
+            <tr>
+                <td>${item.book.name}</td>
+                <td>${item.book.author.name}</td>
+                <td>${item.book.publication.name}</td>
+                <td class="text-center">${item.book.yearPublication}</td>
+                <td class="text-center">${item.book.available}</td>
+                <td class="text-end">
+                    <c:if test="${item.book.available > 0}">
+                        <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}&location=0"
+                           class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.on.hand"/></a>
+                        <a href="${pageContext.request.contextPath}/librarian/approve?id=${item.id}&location=1"
+                           class="btn btn-sm btn-outline-success me-2"><fmt:message key="book.reading.room"/></a>
+                    </c:if>
+                    <a href="${pageContext.request.contextPath}/librarian/cancel?id=${item.id}"
+                       class="btn btn-sm btn-outline-danger"><fmt:message key="librarian.cancel"/></a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

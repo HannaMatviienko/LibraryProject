@@ -37,8 +37,6 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/admin" class="nav-link px-2 link-dark"><fmt:message
-                    key="admin.admin"/></a></li>
             <li><a href="${pageContext.request.contextPath}/admin/authors" class="nav-link px-2 link-dark"><fmt:message
                     key="author.authors"/></a></li>
             <li><a href="${pageContext.request.contextPath}/admin/books"
@@ -127,7 +125,7 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/js/taxi.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/validate.js"></script>
 
 </body>
 </html>

@@ -34,6 +34,7 @@ public class BookDAO {
             book.setPublication(DAOFactory.getPublication().get(result.getInt("publication_id")));
             book.setYearPublication(result.getInt("year_publication"));
             book.setNumberOf((result.getInt("number_of")));
+            book.setAvailable((result.getInt("available")));
         }
 
         if (!isConnection)

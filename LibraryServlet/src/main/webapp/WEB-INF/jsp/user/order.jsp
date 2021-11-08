@@ -18,6 +18,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/pagination.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/library.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -28,10 +29,12 @@
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3 text-begin">
-            <a href="?lang=ua"
+            <a href="#"
+               onclick="addUrlParameter('lang', 'ua')"
                class="btn ${sessionScope.lang == 'en' ? "btn-outline-secondary" : "btn-outline-primary"} btn-sm"><fmt:message
                     key="lang.ua"/></a>
-            <a href="?lang=en"
+            <a href="#"
+               onclick="addUrlParameter('lang', 'en')"
                class="btn ${sessionScope.lang == 'ua' ? "btn-outline-secondary" : "btn-outline-primary"} btn-sm"><fmt:message
                     key="lang.en"/></a>
         </div>

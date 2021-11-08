@@ -17,13 +17,6 @@
                th:class="__${#locale}__=='ua'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.en}]]</a>
         </div>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a th:href="@{/}" class="nav-link px-2 link-primary">[[#{menu.home}]]</a></li>
-            <li><a th:href="@{/common/service}" class="nav-link px-2 link-dark">[[#{menu.services}]]</a></li>
-            <li><a th:href="@{/common/price}" class="nav-link px-2 link-dark">[[#{menu.pricing}]]</a></li>
-            <li><a th:href="@{/common/about}" class="nav-link px-2 link-dark">[[#{menu.about}]]</a></li>
-        </ul>
-
         <div class="col-md-3 text-end">
         </div>
     </header>
@@ -50,16 +43,6 @@
                 </div>
 
                 <div class="col-12">
-                    <label for="userName" class="form-label">[[#{signin.username}]]</label>
-                    <div class="input-group has-validation">
-                        <input th:field="*{userName}" type="text" class="form-control" id="userName" name="userName" required>
-                        <div class="invalid-feedback">
-                            [[#{signin.username.feedback}]]
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
                     <label for="password" class="form-label">[[#{login.password}]]</label>
                     <div class="input-group has-validation">
                         <input th:field="*{password}" type="password" class="form-control" id="password" name="password" required>
@@ -78,12 +61,19 @@
                 </div>
             </div>
 
-            <button class="w-100 btn btn-primary btn-lg mt-5" type="submit">[[#{menu.sign-up}]]</button>
+            <div class="row mt-5">
+                <div class="col">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">[[#{menu.sign-up}]]</button>
+                </div>
+                <div class="col">
+                    <a class="w-100 btn btn-outline-primary btn-lg" th:href="@{/}" >[[#{admin.cancel}]]</a>
+                </div>
+            </div>
         </form>
     </div>
 </div>
 
-<script src="/js/taxi.js"></script>
+<script src="/js/validate.js"></script>
 
 </body>
 </html>

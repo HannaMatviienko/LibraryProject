@@ -24,8 +24,6 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${pageContext.request.contextPath}/librarian" class="nav-link px-2 link-dark"><fmt:message
-                    key="librarian.librarian"/></a></li>
             <li><a href="${pageContext.request.contextPath}/librarian/ordered"
                    class="nav-link px-2 link-dark"><fmt:message key="book.ordered"/></a></li>
             <li><a href="${pageContext.request.contextPath}/librarian/users" class="nav-link px-2 link-primary"><fmt:message
@@ -45,19 +43,25 @@
     <table class="table mt-4">
         <thead>
         <tr>
-            <th class="text-center" style="width: 25%"><fmt:message key="signin.firstname"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="signin.lastname"/></th>
-            <th class="text-center" style="width: 25%"><fmt:message key="login.email"/></th>
+            <th style="width: 25%"><fmt:message key="signin.firstname"/></th>
+            <th style="width: 25%"><fmt:message key="signin.lastname"/></th>
+            <th style="width: 25%"><fmt:message key="login.email"/></th>
+            <th class="text-center" style="width: 25%"></th>
+
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${users}" var="item">
         <tr>
-            <td class="text-center">${item.firstName}</td>
-            <td class="text-center">${item.lastName}</td>
-            <td class="text-center">${item.email}</td>
-            </c:forEach>
+            <td>${item.firstName}</td>
+            <td>${item.lastName}</td>
+            <td>${item.email}</td>
+            <td class="text-end">
+                <a href="${pageContext.request.contextPath}/librarian/accounts?id=${item.id}"
+                   class="btn btn-sm btn-outline-success"><fmt:message key="librarian.view"/></a>
+            </td>
         </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

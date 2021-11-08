@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[[#{user.users}]]</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 text-begin">
+            <a href="?lang=ua"
+               th:class="__${#locale}__=='en'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.ua}]]</a>
+            <a href="?lang=en"
+               th:class="__${#locale}__=='ua'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.en}]]</a>
+        </div>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a th:href="@{/librarian}" class="nav-link px-2 link-dark">[[#{book.ordered}]]</a></li>
+            <li><a th:href="@{/librarian/users}" class="nav-link px-2 link-primary">[[#{user.users}]]</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <a th:href="@{/user/logout}" class="btn btn-outline-primary">[[#{menu.logout}]]</a>
+        </div>
+    </header>
+</div>
+
+<h1 class="text-center">[[#{user.users}]]</h1>
+
+<div class="container">
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th style="width: 25%">[[#{signin.firstname}]]</th>
+            <th style="width: 25%">[[#{signin.lastname}]]</th>
+            <th style="width: 25%">[[#{login.email}]]</th>
+            <th style="width: 25%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td class="text-end">
+                <a th:href="@{/librarian/card/{id}(id=${user.id})}" class="btn btn-sm btn-outline-success">[[#{librarian.view}]]</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

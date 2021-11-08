@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[[#{home.title}]]</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 text-begin">
+            <a href="?lang=ua"
+               th:class="__${#locale}__=='en'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.ua}]]</a>
+            <a href="?lang=en"
+               th:class="__${#locale}__=='ua'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.en}]]</a>
+        </div>
+
+        <div class="col-md-3 text-end">
+            <a th:href="@{/admin/publications}" class="btn btn-primary me-2">[[#{admin.back}]]</a>
+            <a th:href="@{/user/logout}" class="btn btn-outline-primary">[[#{menu.logout}]]</a>
+        </div>
+    </header>
+</div>
+
+<div class="container col-xxl-5 py-3">
+    <div>
+        <form th:action="@{/admin/publication/save}" th:object="${publication}" method="post" class="needs-validation" novalidate="">
+
+            <input th:field="*{id}" type="hidden" name="id">
+
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="name" class="form-label">[[#{publication.name}]]</label>
+                    <input th:field="*{name}" type="text" class="form-control" id="name" name="name"  required>
+                    <div class="invalid-feedback">
+                        [[#{publication.name.feedback}]]
+                    </div>
+                </div>
+            </div>
+
+            <button class="w-half btn btn-primary btn-lg mt-5" type="submit">[[#{admin.save}]]</button>
+            <a class="w-half btn btn-outline-primary btn-lg mt-5" th:href="@{/admin/publications}" >[[#{admin.cancel}]]</a>
+        </form>
+    </div>
+</div>
+<script src="/js/validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[[#{user.user}]]</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/library.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 text-begin">
+            <a href="#"
+               onclick="addUrlParameter('lang', 'ua')"
+               th:class="__${#locale}__=='en'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.ua}]]</a>
+            <a href="#"
+               onclick="addUrlParameter('lang', 'en')"
+               th:class="__${#locale}__=='ua'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.en}]]</a>
+        </div>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a th:href="@{/librarian}" class="nav-link px-2 link-dark">[[#{book.ordered}]]</a></li>
+            <li><a th:href="@{/librarian/users}" class="nav-link px-2 link-primary">[[#{user.users}]]</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <a th:href="@{/librarian/users}" class="btn btn-primary me-2">[[#{admin.back}]]</a>
+            <a th:href="@{/user/logout}" class="btn btn-outline-primary">[[#{menu.logout}]]</a>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+    <table th:if="${!fine.isEmpty()}" class="table mt-4">
+        <thead>
+        <tr>
+            <th>[[#{book.title}]]</th>
+            <th class="text-center">[[#{user.wite}]]</th>
+            <th class="text-center">[[#{user.days}]]</th>
+            <th class="text-center">[[#{date.return}]]</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${fine}">
+            <td class="text-center" th:text="${item.fine}"></td>
+            <td class="text-center" th:text="${item.days}"></td>
+            <td class="text-center" th:text="${item.dateBack}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1 class="text-center">[[#{user.account}]]</h1>
+    <div class="container">
+        <p><span>[[#{user.name}]]</span><strong th:text="${user}"></strong></p>
+        <p><span>[[#{user.email}]]</span><strong th:text="${user.email}"></strong></p>
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>[[#{book.title}]]</th>
+                <th>[[#{author.name}]]</th>
+                <th>[[#{publication.name}]]</th>
+                <th class="text-center">[[#{year.publication}]]</th>
+                <th class="text-center">[[#{date.returned}]]</th>
+                <th class="text-center" style="width: 10%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${card}" th:class="${item.statusClass}">
+                <td th:text="${item.book.name}"></td>
+                <td th:text="${item.book.author.name}"></td>
+                <td th:text="${item.book.publication.name}"></td>
+                <td class="text-center" th:text="${item.book.yearPublication}"></td>
+                <td class="text-center" th:text="${item.statusDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

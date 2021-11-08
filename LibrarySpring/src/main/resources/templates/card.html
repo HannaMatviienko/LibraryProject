@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[[#{user.user}]]</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 text-begin">
+            <a href="?lang=ua"
+               th:class="__${#locale}__=='en'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.ua}]]</a>
+            <a href="?lang=en"
+               th:class="__${#locale}__=='ua'?'btn-outline-secondary btn btn-sm':'btn-outline-primary btn btn-sm'">[[#{lang.en}]]</a>
+        </div>
+
+        <div class="col-md-3 text-end">
+            <a th:href="@{/card/order}" class="btn btn-primary me-2">[[#{book.order}]]</a>
+            <a th:href="@{/user/logout}" class="btn btn-outline-primary">[[#{menu.logout}]]</a>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+    <table th:if="${!fine.isEmpty()}" class="table mt-4">
+        <thead>
+        <tr>
+            <th>[[#{book.title}]]</th>
+            <th class="text-center">[[#{user.wite}]]</th>
+            <th class="text-center">[[#{user.days}]]</th>
+            <th class="text-center">[[#{date.return}]]</th>
+            <th class="text-center" style="width: 10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${fine}">
+            <td class="text-center" th:text="${item.fine}"></td>
+            <td class="text-center" th:text="${item.days}"></td>
+            <td class="text-center" th:text="${item.dateBack}"></td>
+            <td class="text-center">
+                <a th:href="@{/card/pay/{id}(id=${item.id})}"
+                   class="btn btn-sm btn-outline-danger me-2">[[#{user.pay}]]</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1 class="text-center">[[#{user.account}]]</h1>
+    <div class="container">
+        <p><span>[[#{user.name}]]</span><strong th:text="${user}"></strong></p>
+        <p><span>[[#{user.email}]]</span><strong th:text="${user.email}"></strong></p>
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>[[#{book.title}]]</th>
+                <th>[[#{author.name}]]</th>
+                <th>[[#{publication.name}]]</th>
+                <th class="text-center">[[#{year.publication}]]</th>
+                <th class="text-center">[[#{date.returned}]]</th>
+                <th class="text-center" style="width: 10%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${card}" th:class="${item.statusClass}">
+                <td th:text="${item.book.name}"></td>
+                <td th:text="${item.book.author.name}"></td>
+                <td th:text="${item.book.publication.name}"></td>
+                <td class="text-center" th:text="${item.book.yearPublication}"></td>
+                <td class="text-center" th:text="${item.statusDate}"></td>
+                <td class="text-center">
+                    <a th:if="${item.status == 0}" th:href="@{/card/delete/{id}(id=${item.id})}"
+                       class="btn btn-sm btn-outline-danger me-2">[[#{book.remove}]]</a>
+
+                    <a th:if="${item.status == 1}" th:href="@{/card/return/{id}(id=${item.id})}"
+                       class="btn btn-sm btn-outline-success me-2">[[#{book.return}]]</a>
+
+                    <a th:if="${item.status == 2}" th:href="@{/card/order/{id}(id=${item.id})}"
+                       class="btn btn-sm btn-outline-secondary me-2">[[#{book.reorder}]]</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
